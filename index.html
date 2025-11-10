@@ -34,8 +34,8 @@
     <div class="hero-text">
       <h1>Concrete Test Manager (CTM) WebBrowser</h1>
       <p class="hero-subtitle">
-        Gestione strutturata dei getti di calcestruzzo con interfaccia via browser, logica coerente
-        con il lavoro di studio tecnico e laboratorio.
+        Gestione strutturata dei getti di calcestruzzo con interfaccia via browser,
+        logica coerente con il lavoro di studio tecnico e laboratorio.
       </p>
 
       <p class="hero-body">
@@ -48,29 +48,29 @@
     <!-- SLIDESHOW SCHERMATE -->
     <div class="hero-screens">
       <div class="slider">
+        <button class="slider-arrow left" aria-label="Schermata precedente">&#10094;</button>
         <div class="slide active">
           <img src="1.jpg" alt="Schermata principale di CTM WebBrowser con elenco getti e stato PEC" />
         </div>
         <div class="slide">
           <img src="2.jpg" alt="Schermata di CTM WebBrowser con programmazione eventi e scadenze" />
         </div>
-      </div>
-      <div class="slider-dots">
-        <button class="dot active" data-slide="0" aria-label="Mostra schermata 1"></button>
-        <button class="dot" data-slide="1" aria-label="Mostra schermata 2"></button>
+        <button class="slider-arrow right" aria-label="Schermata successiva">&#10095;</button>
       </div>
     </div>
 
     <!-- BLOCCO PREZZO + DOWNLOAD -->
     <div class="hero-download">
       <p class="pricing">
-        Offerta lancio: <strong>19,90 €</strong> per i primi 15 giorni dalla pubblicazione della versione
-        corrente; successivamente il prezzo sarà <strong>29,90 €</strong>.
+        Prezzo di listino: <strong>49,90 €</strong> per una postazione con licenza <strong>life-time</strong>;
+        prezzo di lancio <strong>29,90 €</strong>.
+        Sono compresi gli aggiornamenti correttivi (bugfix) e l’assistenza via mail.
       </p>
 
       <div class="hero-cta">
         <div class="offer-wrapper">
-          <img class="offer-image" src="sconto.png" alt="Offerta di lancio CTM WebBrowser 19,90 € per i primi 15 giorni" />
+          <img class="offer-image" src="sconto.png"
+               alt="Offerta di lancio CTM WebBrowser 29,90 € anziché 49,90 € per i primi 15 giorni" />
         </div>
         <div class="download-wrapper">
           <a class="btn-primary"
@@ -78,6 +78,9 @@
              rel="noopener noreferrer"
              download>
             Scarica CTM WebBrowser (.exe)
+          </a>
+          <a class="btn-secondary" href="acquista.html">
+            Acquista licenza
           </a>
         </div>
       </div>
@@ -183,8 +186,9 @@
 
     // slider
     var slides = document.querySelectorAll('.slide');
-    var dots = document.querySelectorAll('.dot');
-    if (!slides.length || !dots.length) return;
+    var prevBtn = document.querySelector('.slider-arrow.left');
+    var nextBtn = document.querySelector('.slider-arrow.right');
+    if (!slides.length || !prevBtn || !nextBtn) return;
 
     var current = 0;
     var timer = null;
@@ -192,9 +196,6 @@
     function showSlide(index) {
       slides.forEach(function (s, i) {
         s.classList.toggle('active', i === index);
-      });
-      dots.forEach(function (d, i) {
-        d.classList.toggle('active', i === index);
       });
       current = index;
     }
@@ -204,9 +205,14 @@
       showSlide(next);
     }
 
+    function prevSlide() {
+      var prev = (current - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+
     function startAuto() {
       stopAuto();
-      timer = setInterval(nextSlide, 7000);
+      timer = setInterval(nextSlide, 5000); // 5 secondi
     }
 
     function stopAuto() {
@@ -216,14 +222,14 @@
       }
     }
 
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        var idx = parseInt(dot.getAttribute('data-slide'), 10);
-        if (!isNaN(idx)) {
-          showSlide(idx);
-          startAuto();
-        }
-      });
+    nextBtn.addEventListener('click', function () {
+      nextSlide();
+      startAuto();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      prevSlide();
+      startAuto();
     });
 
     // avvio

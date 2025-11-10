@@ -150,24 +150,33 @@ body {
   height: auto;
 }
 
-.slider-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.dot {
-  width: 9px;
-  height: 9px;
+/* FRECCE SLIDER */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
   border: none;
-  background: #cbd5f5;
+  background: rgba(15, 23, 42, 0.25);
+  color: #ffffff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dot.active {
-  background: #2563eb;
+.slider-arrow.left {
+  left: 10px;
+}
+
+.slider-arrow.right {
+  right: 10px;
+}
+
+.slider-arrow:hover {
+  background: rgba(15, 23, 42, 0.4);
 }
 
 /* BLOCCO DOWNLOAD HERO */
@@ -181,7 +190,7 @@ body {
   margin: 6px 0 10px;
 }
 
-/* immagine offerta + bottone */
+/* immagine offerta + bottoni */
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
@@ -195,12 +204,15 @@ body {
 
 .offer-image {
   display: block;
-  max-width: 220px;
+  max-width: 154px; /* ~70% di 220 px */
   border-radius: 18px;
 }
 
 .download-wrapper {
   flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .hero-meta {
@@ -233,7 +245,6 @@ body {
 }
 
 .btn-secondary {
-  margin-top: 8px;
   background: #e5e7eb;
   color: #111827;
 }

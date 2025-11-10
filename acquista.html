@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acquista licenza · Concrete Test Manager (CTM) WebBrowser</title>
+  <meta name="description"
+        content="Acquisto licenza CTM WebBrowser: modalità di pagamento e dati per la fatturazione.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo-pill">
+      <span class="logo-mark">CTM</span>
+      <span class="logo-text">WebBrowser</span>
+    </div>
+    <nav class="topnav">
+      <a href="index.html#top">Torna al sito</a>
+      <a href="#pagamento">Pagamento</a>
+      <a href="#fatturazione">Dati fatturazione</a>
+      <a href="#recensioni">Recensioni</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="section">
+      <h2>Acquisto licenza CTM WebBrowser</h2>
+      <p>
+        La licenza di CTM WebBrowser è valida per <strong>una postazione</strong> con
+        <strong>licenza life-time</strong>. Nel prezzo sono compresi:
+      </p>
+      <ul class="info-list">
+        <li>utilizzo illimitato della versione acquistata;</li>
+        <li>aggiornamenti correttivi (bugfix) rilasciati per la stessa versione;</li>
+        <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+      </ul>
+      <p>
+        Prezzo di listino: <strong>49,90 €</strong> per postazione;<br>
+        prezzo di lancio: <strong>29,90 €</strong> per postazione
+        (oltre IVA se applicabile).
+      </p>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <section class="section" id="pagamento">
+      <h2>Modalità di pagamento</h2>
+
+      <h3>Bonifico bancario</h3>
+      <p>Puoi effettuare il pagamento tramite bonifico utilizzando i dati seguenti:</p>
+      <ul class="info-list">
+        <li>intestatario: nome e cognome professionista/società (da definire);</li>
+        <li>IBAN: <strong>IT60X0000000000000000000000</strong> (esempio, da sostituire con quello reale);</li>
+        <li>importo: <strong>29,90 €</strong> per licenza singola (oltre IVA se applicabile);</li>
+        <li>causale: <strong>“CTM WebBrowser – licenza singola – [nome cognome / studio]”</strong>.</li>
+      </ul>
+      <p class="note">
+        Dopo il pagamento invia una mail con la ricevuta e i dati di fatturazione a
+        <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+      </p>
+
+      <h3>PayPal</h3>
+      <p>
+        In alternativa puoi pagare tramite PayPal. Una volta configurato l’account,
+        il pagamento potrà essere effettuato verso l’indirizzo:
+      </p>
+      <p><strong>ctmbrowser@gmail.com</strong></p>
+      <p class="note">
+        Nella nota del pagamento indica sempre “CTM WebBrowser – licenza singola” e i dati dello studio.
+      </p>
+
+      <h3>Carta di credito</h3>
+      <p>
+        L’integrazione per il pagamento diretto con carta di credito potrà essere gestita tramite
+        piattaforma esterna (es. PayPal Checkout o altro gateway). In attesa dell’integrazione,
+        è possibile utilizzare carta di credito tramite PayPal.
+      </p>
+    </section>
+
+    <!-- DATI FATTURAZIONE -->
+    <section class="section" id="fatturazione">
+      <h2>Dati per la fatturazione</h2>
+      <p>
+        Compila i dati seguenti e inviali via mail insieme alla conferma di pagamento.
+        Puoi copiare e incollare lo schema in un messaggio a
+        <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+      </p>
+
+      <form class="billing-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" placeholder="Mario" />
+          </div>
+          <div class="form-field">
+            <label for="cognome">Cognome</label>
+            <input id="cognome" type="text" placeholder="Rossi" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="ragione">Ragione sociale (se presente)</label>
+          <input id="ragione" type="text" placeholder="Studio Tecnico Rossi" />
+        </div>
+
+        <div class="form-field">
+          <label for="indirizzo">Indirizzo di fatturazione</label>
+          <input id="indirizzo" type="text" placeholder="Via Esempio 1, CAP, Città (Provincia)" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="piva">Partita IVA</label>
+            <input id="piva" type="text" placeholder="IT12345678901" />
+          </div>
+          <div class="form-field">
+            <label for="cfisc">Codice fiscale</label>
+            <input id="cfisc" type="text" placeholder="RSSMRA80A01H501Z" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email per invio fattura</label>
+            <input id="email" type="email" placeholder="nome@studio.it" />
+          </div>
+          <div class="form-field">
+            <label for="telefono">Telefono (opzionale)</label>
+            <input id="telefono" type="tel" placeholder="+39 ..." />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="note">Note aggiuntive</label>
+          <textarea id="note" rows="3" placeholder="Eventuali riferimenti ordine, CIG/CUP, indicazioni particolari..."></textarea>
+        </div>
+
+        <p class="note">
+          Questo form è solo dimostrativo e non invia dati automaticamente.
+          Utilizzalo come promemoria per i campi da riportare nella mail di richiesta fattura.
+        </p>
+      </form>
+    </section>
+
+    <!-- RECENSIONI -->
+    <section class="section" id="recensioni">
+      <h2>Recensioni degli utilizzatori</h2>
+      <p>
+        Di seguito uno spazio dedicato a breve commento sull’esperienza d’uso da parte di chi utilizza CTM WebBrowser
+        in studio o in laboratorio. Le recensioni possono essere inviate via mail e, previa autorizzazione,
+        pubblicate in forma sintetica.
+      </p>
+
+      <div class="reviews-placeholder">
+        <p class="note">
+          Nessuna recensione pubblicata al momento. Le testimonianze potranno essere inserite qui a seguito
+          di autorizzazione da parte dei clienti.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  });
+</script>
+
+</body>
+</html>
