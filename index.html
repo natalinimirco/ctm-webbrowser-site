@@ -5,80 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Concrete Test Manager (CTM) WebBrowser</title>
   <meta name="description"
-        content="Concrete Test Manager (CTM) WebBrowser – applicazione desktop per la gestione dei getti di calcestruzzo.">
+        content="Concrete Test Manager (CTM) WebBrowser – applicazione desktop per la gestione e la pianificazione dei getti di calcestruzzo.">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<div class="container">
+<div class="page">
 
-  <header class="header">
-    <h1>Concrete Test Manager</h1>
-    <p class="subtitle">WebBrowser Edition · Gestione dei getti di calcestruzzo</p>
-  </header>
+  <!-- HEADER / HERO -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Concrete Test Manager</h1>
+      <p class="hero-subtitle">WebBrowser Edition · Gestione dei getti di calcestruzzo</p>
 
-  <main>
-    <section class="intro">
-      <p>
-        <strong>CTM WebBrowser</strong> è un software desktop che offre una
-        moderna interfaccia via browser per la pianificazione e la gestione
-        dei getti di calcestruzzo. Tutti i dati restano memorizzati in locale:
-        nessuna connessione o cloud obbligatorio.
+      <p class="hero-body">
+        <strong>CTM WebBrowser</strong> è un’applicazione desktop che espone una
+        interfaccia moderna via browser per pianificare, registrare e monitorare
+        i getti di calcestruzzo. Tutti i dati rimangono memorizzati in locale:
+        nessun cloud obbligatorio, nessun invio automatico all’esterno.
       </p>
-    </section>
 
-    <section class="download">
-      <h2>⬇️ Download</h2>
-      <p>
-        Scarica il file di installazione per Windows:
-      </p>
-      <a class="button primary"
-         href="REPLACE_WITH_RELEASE_URL"
+      <a class="btn-primary"
+         href="https://github.com/natalinmirco/ctm-webbrowser-site/releases/latest/download/CTM_WebBrowser_1.0_Setup.exe"
          rel="noopener noreferrer"
          download>
         Scarica CTM WebBrowser (.exe)
       </a>
 
-      <div class="instructions">
-        <h3>Istruzioni di installazione</h3>
-        <ol>
-          <li>Scarica il file <strong>CTM_WebBrowser_1.0_Setup.exe</strong>.</li>
-          <li>Esegui l’installer (potrebbe essere richiesta l’autorizzazione dell’amministratore).</li>
-          <li>Al termine, apri CTM: il browser predefinito si avvierà automaticamente con l’interfaccia del programma.</li>
-        </ol>
-        <p class="note">
-          Per maggiori informazioni e dettagli operativi, consulta il manuale utente incluso nella directory del programma.
-        </p>
+      <p class="hero-meta">
+        Versione <strong>1.0.0</strong> · Sistema operativo: Windows 10 o successivo.
+      </p>
+    </div>
+
+    <div class="hero-screens">
+      <div class="screenshot-card card-1">
+        <img src="1.jpg" alt="Schermata principale di CTM WebBrowser" />
       </div>
+      <div class="screenshot-card card-2">
+        <img src="2.jpg" alt="Dettaglio gestione eventi e calendario in CTM WebBrowser" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- FUNZIONI -->
+    <section class="section">
+      <h2>Funzioni principali</h2>
+      <ul class="feature-list">
+        <li>Archivio strutturato dei getti con cliente, cantiere, elemento e data.</li>
+        <li>Calcolo automatico dei giorni rimanenti e livello di urgenza.</li>
+        <li>Promemoria per PEC, calendario e scadenze di controllo.</li>
+        <li>Backup e ripristino dell’archivio dedicati all’applicazione.</li>
+        <li>Interfaccia via browser, con dati sempre residenti sul tuo PC.</li>
+      </ul>
     </section>
 
-    <section class="manual">
-      <h2>📘 Manuale utente</h2>
+    <!-- DOWNLOAD + INSTALLAZIONE -->
+    <section class="section">
+      <h2>Download e installazione</h2>
       <p>
-        Puoi leggere il manuale direttamente dalla cartella del programma, oppure scaricarlo qui in formato PDF:
+        Per installare CTM WebBrowser:
       </p>
-      <a class="button"
+      <ol class="steps">
+        <li>Clicca sul pulsante <strong>“Scarica CTM WebBrowser (.exe)”</strong> in alto.</li>
+        <li>Salva il file <strong>CTM_WebBrowser_1.0_Setup.exe</strong> sul tuo PC.</li>
+        <li>Esegui l’installer (potrebbe essere richiesta la conferma dell’amministratore).</li>
+        <li>Al termine, avvia CTM dal collegamento sul Desktop o dal menu Start.</li>
+        <li>Il browser predefinito si aprirà automaticamente con l’interfaccia di CTM.</li>
+      </ol>
+      <p class="note">
+        Per maggiori dettagli operativi fai riferimento al manuale utente incluso
+        nella directory del programma.
+      </p>
+    </section>
+
+    <!-- MANUALE -->
+    <section class="section">
+      <h2>Manuale utente</h2>
+      <p>
+        Il manuale è disponibile sia all’interno della cartella di installazione, sia come download diretto da questa pagina:
+      </p>
+      <a class="btn-secondary"
          href="Manuale%20CTM_Browser%201.0.pdf"
          download>
         Scarica Manuale Utente (PDF)
       </a>
     </section>
 
-    <section class="info">
-      <h2>ℹ️ Informazioni</h2>
-      <ul>
-        <li>Versione: <strong>1.0.0</strong></li>
-        <li>Sistema operativo: Windows 10 o successivo</li>
-        <li>Connessione Internet: non necessaria per l’uso ordinario</li>
+    <!-- INFO / REQUISITI -->
+    <section class="section">
+      <h2>Informazioni e requisiti</h2>
+      <ul class="info-list">
+        <li>Versione applicativa: <strong>CTM WebBrowser 1.0.0</strong></li>
+        <li>Piattaforma: Windows 10 o successivo (64 bit consigliato).</li>
+        <li>Browser richiesto: Chrome, Edge, Firefox o equivalente aggiornato.</li>
+        <li>Connessione Internet: non necessaria per l’utilizzo ordinario.</li>
+        <li>Dati di lavoro e backup memorizzati in locale sul PC dell’utente.</li>
       </ul>
     </section>
 
-    <section class="contact">
-      <h2>📩 Contatti</h2>
-      <p>Per richieste di licenza o supporto tecnico:</p>
-      <p><a href="mailto:INSERISCI_TUA_EMAIL">INSERISCI_TUA_EMAIL</a></p>
+    <!-- CONTATTI -->
+    <section class="section">
+      <h2>Contatti</h2>
+      <p>Per richieste di licenza, assistenza o segnalazioni:</p>
+      <p><a href="mailto:CTMWB@gmail.com">CTMWB@gmail.com</a></p>
     </section>
+
   </main>
 
   <footer class="footer">
