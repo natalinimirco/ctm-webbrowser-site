@@ -32,11 +32,6 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
-      <div class="hero-badge">
-        <span>Concrete Test Manager</span>
-        <strong>WebBrowser · versione 1.0.0</strong>
-      </div>
-
       <h1>Concrete Test Manager (CTM) WebBrowser</h1>
       <p class="hero-subtitle">
         Gestione strutturata dei getti di calcestruzzo con interfaccia via browser, logica coerente
@@ -73,12 +68,19 @@
         corrente; successivamente il prezzo sarà <strong>29,90 €</strong>.
       </p>
 
-      <a class="btn-primary"
-         href="https://github.com/natalinmirco/ctm-webbrowser-site/releases/latest/download/CTM_WebBrowser_1.0_Setup.exe"
-         rel="noopener noreferrer"
-         download>
-        Scarica CTM WebBrowser (.exe)
-      </a>
+      <div class="hero-cta">
+        <div class="offer-wrapper">
+          <img class="offer-image" src="sconto.png" alt="Offerta di lancio CTM WebBrowser 19,90 € per i primi 15 giorni" />
+        </div>
+        <div class="download-wrapper">
+          <a class="btn-primary"
+             href="https://github.com/natalinmirco/ctm-webbrowser-site/releases/latest/download/CTM_WebBrowser_1.0_Setup.exe"
+             rel="noopener noreferrer"
+             download>
+            Scarica CTM WebBrowser (.exe)
+          </a>
+        </div>
+      </div>
 
       <p class="hero-meta">
         Eseguibile per sistemi operativi Windows supportati.<br>
@@ -228,7 +230,6 @@
     showSlide(0);
     startAuto();
 
-    // opzionale: ferma slideshow se il tab perde il focus
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         stopAuto();
