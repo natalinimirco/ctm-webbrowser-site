@@ -1,8 +1,13 @@
-/* SFONDO GENERALE – stesso stile dell'app */
-html, body {
-  height: 100%;
+/* SFONDO GENERALE – stesso stile dell'app, esteso su tutta la pagina */
+html {
   margin: 0;
   padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #1f2933;
   background-image:
@@ -11,6 +16,7 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 }
 
 /* CONTENITORE PRINCIPALE */
@@ -19,32 +25,55 @@ html, body {
   margin: 24px auto 40px;
   padding: 28px 28px 32px;
   background: rgba(255, 255, 255, 0.96);
-  border-radius: 18px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.45);
 }
 
 /* HERO */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-  gap: 24px;
+  gap: 28px;
   align-items: center;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0f172a;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.hero-badge span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.hero-badge strong {
+  font-size: 0.8rem;
 }
 
 .hero-text h1 {
-  font-size: 2rem;
+  font-size: 2.1rem;
   margin: 0 0 4px;
 }
 
 .hero-subtitle {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: #6b7280;
   margin-bottom: 14px;
 }
 
 .hero-body {
-  font-size: 0.97rem;
+  font-size: 0.98rem;
   color: #4b5563;
   margin-bottom: 16px;
 }
@@ -69,13 +98,13 @@ html, body {
 }
 
 .btn-primary {
-  background: #2563eb;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #ffffff;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.5);
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  filter: brightness(1.05);
 }
 
 .btn-secondary {
@@ -88,46 +117,65 @@ html, body {
   background: #d1d5db;
 }
 
-/* SCHERMATE */
+/* SLIDER SCHERMATE */
 .hero-screens {
   position: relative;
   width: 100%;
-  min-height: 220px;
 }
 
-.screenshot-card {
-  position: absolute;
-  width: 82%;
-  max-width: 420px;
-  border-radius: 16px;
+.slider {
+  position: relative;
+  width: 100%;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #ffffff;
 }
 
-.screenshot-card img {
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.card-1 {
-  top: 0;
-  left: 0;
-  transform: rotate(-3deg);
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
 }
 
-.card-2 {
-  bottom: 0;
-  right: 0;
-  transform: rotate(2deg);
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: none;
+  background: #cbd5f5;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #2563eb;
 }
 
 /* SEZIONI TESTO */
 .section {
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 18px 20px 20px;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
   margin-bottom: 18px;
@@ -194,35 +242,10 @@ html, body {
   .hero {
     grid-template-columns: 1fr;
   }
-
-  .hero-screens {
-    min-height: 260px;
-  }
-
-  .screenshot-card {
-    position: absolute;
-    width: 88%;
-  }
 }
 
 @media (max-width: 600px) {
-  .hero-screens {
-    min-height: 220px;
-  }
-
-  .screenshot-card {
-    width: 95%;
-  }
-
-  .card-1 {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-  }
-
-  .card-2 {
-    bottom: 0;
-    right: 50%;
-    transform: translateX(50%) rotate(2deg);
+  .slider {
+    border-radius: 14px;
   }
 }

@@ -16,14 +16,19 @@
   <!-- HEADER / HERO -->
   <header class="hero">
     <div class="hero-text">
+      <div class="hero-badge">
+        <span>ctm webbrowser</span>
+        <strong>versione 1.0.0</strong>
+      </div>
+
       <h1>Concrete Test Manager</h1>
-      <p class="hero-subtitle">WebBrowser Edition · Gestione dei getti di calcestruzzo</p>
+      <p class="hero-subtitle">WebBrowser Edition · gestione tecnica dei getti di calcestruzzo</p>
 
       <p class="hero-body">
-        <strong>CTM WebBrowser</strong> è un’applicazione desktop che espone una
-        interfaccia moderna via browser per pianificare, registrare e monitorare
-        i getti di calcestruzzo. Tutti i dati rimangono memorizzati in locale:
-        nessun cloud obbligatorio, nessun invio automatico all’esterno.
+        <strong>CTM WebBrowser</strong> è un’applicazione desktop che espone
+        un’interfaccia moderna via browser per pianificare, registrare e monitorare
+        i getti di calcestruzzo. L’archivio è interamente in locale: tu controlli i dati,
+        il software li organizza e li rende leggibili in pochi secondi.
       </p>
 
       <a class="btn-primary"
@@ -34,16 +39,24 @@
       </a>
 
       <p class="hero-meta">
-        Versione <strong>1.0.0</strong> · Sistema operativo: Windows 10 o successivo.
+        eseguibile per sistemi windows supportati;<br>
+        connessione internet richiesta per attivazione e, opzionalmente, per sincronizzazione con google calendar.
       </p>
     </div>
 
+    <!-- SLIDESHOW SCHERMATE -->
     <div class="hero-screens">
-      <div class="screenshot-card card-1">
-        <img src="1.jpg" alt="Schermata principale di CTM WebBrowser" />
+      <div class="slider">
+        <div class="slide active">
+          <img src="1.jpg" alt="Schermata principale di CTM WebBrowser: elenco getti e stato PEC" />
+        </div>
+        <div class="slide">
+          <img src="2.jpg" alt="Schermata CTM WebBrowser: programmazione eventi e scadenze" />
+        </div>
       </div>
-      <div class="screenshot-card card-2">
-        <img src="2.jpg" alt="Dettaglio gestione eventi e calendario in CTM WebBrowser" />
+      <div class="slider-dots">
+        <button class="dot active" data-slide="0" aria-label="Mostra schermata 1"></button>
+        <button class="dot" data-slide="1" aria-label="Mostra schermata 2"></button>
       </div>
     </div>
   </header>
@@ -54,30 +67,28 @@
     <section class="section">
       <h2>Funzioni principali</h2>
       <ul class="feature-list">
-        <li>Archivio strutturato dei getti con cliente, cantiere, elemento e data.</li>
-        <li>Calcolo automatico dei giorni rimanenti e livello di urgenza.</li>
-        <li>Promemoria per PEC, calendario e scadenze di controllo.</li>
-        <li>Backup e ripristino dell’archivio dedicati all’applicazione.</li>
-        <li>Interfaccia via browser, con dati sempre residenti sul tuo PC.</li>
+        <li>archivio dei getti con cliente, cantiere, elemento e data di getto;</li>
+        <li>calcolo automatico dei giorni rimanenti e indicatore di urgenza;</li>
+        <li>gestione dello stato pec e pianificazione degli eventi in calendario;</li>
+        <li>backup e ripristino dedicati all’archivio dell’applicazione;</li>
+        <li>interfaccia via browser con dati sempre residenti sul pc dell’utilizzatore.</li>
       </ul>
     </section>
 
     <!-- DOWNLOAD + INSTALLAZIONE -->
     <section class="section">
       <h2>Download e installazione</h2>
-      <p>
-        Per installare CTM WebBrowser:
-      </p>
+      <p>per installare ctm webbrowser:</p>
       <ol class="steps">
-        <li>Clicca sul pulsante <strong>“Scarica CTM WebBrowser (.exe)”</strong> in alto.</li>
-        <li>Salva il file <strong>CTM_WebBrowser_1.0_Setup.exe</strong> sul tuo PC.</li>
-        <li>Esegui l’installer (potrebbe essere richiesta la conferma dell’amministratore).</li>
-        <li>Al termine, avvia CTM dal collegamento sul Desktop o dal menu Start.</li>
-        <li>Il browser predefinito si aprirà automaticamente con l’interfaccia di CTM.</li>
+        <li>clicca sul pulsante <strong>“scarica ctm webbrowser (.exe)”</strong> in alto;</li>
+        <li>salva il file <strong>ctm_webbrowser_1.0_setup.exe</strong> sul tuo pc;</li>
+        <li>esegui l’installer (potrebbe essere richiesta la conferma dell’amministratore di sistema);</li>
+        <li>al termine, avvia ctm dal collegamento sul desktop o dal menu start;</li>
+        <li>il browser predefinito si aprirà automaticamente con l’interfaccia di ctm.</li>
       </ol>
       <p class="note">
-        Per maggiori dettagli operativi fai riferimento al manuale utente incluso
-        nella directory del programma.
+        per ulteriori dettagli operativi e flussi di lavoro suggeriti, fai riferimento al manuale utente incluso
+        nella directory dell’applicazione.
       </p>
     </section>
 
@@ -85,12 +96,12 @@
     <section class="section">
       <h2>Manuale utente</h2>
       <p>
-        Il manuale è disponibile sia all’interno della cartella di installazione, sia come download diretto da questa pagina:
+        il manuale è disponibile sia all’interno della cartella di installazione, sia come download diretto da questa pagina:
       </p>
       <a class="btn-secondary"
          href="Manuale%20CTM_Browser%201.0.pdf"
          download>
-        Scarica Manuale Utente (PDF)
+        scarica manuale utente (pdf)
       </a>
     </section>
 
@@ -98,31 +109,78 @@
     <section class="section">
       <h2>Informazioni e requisiti</h2>
       <ul class="info-list">
-        <li>Versione applicativa: <strong>CTM WebBrowser 1.0.0</strong></li>
-        <li>Piattaforma: Windows 10 o successivo (64 bit consigliato).</li>
-        <li>Browser richiesto: Chrome, Edge, Firefox o equivalente aggiornato.</li>
-        <li>Connessione Internet: non necessaria per l’utilizzo ordinario.</li>
-        <li>Dati di lavoro e backup memorizzati in locale sul PC dell’utente.</li>
+        <li>versione applicativa: <strong>ctm webbrowser 1.0.0</strong>;</li>
+        <li>piattaforma: sistemi operativi windows supportati dall’eseguibile;</li>
+        <li>browser richiesto: chrome, edge, firefox o altro browser moderno aggiornato;</li>
+        <li>connessione internet: necessaria per attivazione e per eventuale sincronizzazione con google calendar;</li>
+        <li>dati di lavoro e backup memorizzati in locale sul pc dell’utilizzatore.</li>
       </ul>
     </section>
 
     <!-- CONTATTI -->
     <section class="section">
       <h2>Contatti</h2>
-      <p>Per richieste di licenza, assistenza o segnalazioni:</p>
-      <p><a href="mailto:CTMWB@gmail.com">CTMWB@gmail.com</a></p>
+      <p>per richieste di licenza, assistenza o segnalazioni:</p>
+      <p><a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a></p>
     </section>
 
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+    <p>© <span id="year"></span> concrete test manager (ctm) webbrowser – tutti i diritti riservati.</p>
   </footer>
 
 </div>
 
 <script>
+  // anno footer
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // slider semplice
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0;
+  let timer = null;
+
+  function showSlide(index) {
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+    current = index;
+  }
+
+  function nextSlide() {
+    const next = (current + 1) % slides.length;
+    showSlide(next);
+  }
+
+  function startAuto() {
+    stopAuto();
+    timer = setInterval(nextSlide, 7000); // 7 secondi
+  }
+
+  function stopAuto() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-slide'), 10);
+      showSlide(idx);
+      startAuto();
+    });
+  });
+
+  // avvio
+  showSlide(0);
+  startAuto();
 </script>
+
 </body>
 </html>
