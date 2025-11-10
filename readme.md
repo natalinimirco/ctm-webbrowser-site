@@ -1,54 +1,16 @@
-\# Concrete Test Manager (CTM) WebBrowser – Sito ufficiale
+# Concrete Test Manager (CTM) WebBrowser
 
+Sito ufficiale del software **CTM WebBrowser**.
 
+## Contenuti
 
-Questo repository contiene il sito statico pubblicato tramite \*\*GitHub Pages\*\*
+- Pagina `index.html` con descrizione, link al setup e al manuale utente.
+- File `Manuale CTM_Browser 1.0.pdf` scaricabile direttamente.
+- Foglio di stile `style.css` in tema chiaro ispirato a Notion.
 
-per la distribuzione dell'applicazione desktop \*\*Concrete Test Manager (CTM) WebBrowser\*\*.
+## Pubblicazione
 
-
-
-\## Struttura
-
-
-
-\- `index.html` – Landing page pubblica con descrizione del software, link al download e sezioni informative.
-
-\- `style.css` – Foglio di stile principale per la pagina.
-
-\- (Opzionale) altri file di documentazione, immagini, manuali in PDF.
-
-
-
-\## Deploy
-
-
-
-Il sito è pubblicato tramite GitHub Pages:
-
-
-
-1\. Repository pubblico.
-
-2\. Settings → Pages → Source: `main` (root).
-
-3\. L'URL risultante è del tipo:
-
-
-
-&nbsp;  `https://TUOUSERNAME.github.io/ctm-webbrowser-site/`
-
-
-
-\## Download del software
-
-
-
-Il file `.exe` dell'installer non è memorizzato direttamente nella pagina,
-
-ma caricato come asset di una \*\*GitHub Release\*\*.
-
-L'URL della Release viene inserito in `index.html` nei pulsanti di download.
-
-
-
+1. Il sito è ospitato su GitHub Pages  
+   https://mirconatalini.github.io/ctm-webbrowser-site/
+2. Le versioni del software sono distribuite come asset delle *GitHub Releases*.
+3. Per aggiornare il link di download, sostituire l’URL nel `index.html`.
