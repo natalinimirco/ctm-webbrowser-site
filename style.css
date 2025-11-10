@@ -23,19 +23,27 @@ body {
 .page {
   max-width: 1120px;
   margin: 24px auto 40px;
-  padding: 26px 28px 30px;
+  padding: 24px 26px 30px;
   background: rgba(255, 255, 255, 0.97);
   border-radius: 22px;
   box-shadow: 0 18px 50px rgba(15, 23, 42, 0.5);
 }
 
-/* TOPBAR */
+/* TOPBAR CON BARRA SEMI-TRASPARENTE */
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 18px;
+  padding: 10px 14px;
+  margin: -8px -12px 18px;
+  border-radius: 14px;
+  background: rgba(248, 250, 252, 0.86);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(14px);
 }
 
 .logo-pill {
@@ -65,24 +73,25 @@ body {
 }
 
 .topnav a {
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   text-decoration: none;
-  color: #111827;
-  padding: 6px 10px;
+  color: #0f172a;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: #e5e7eb;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .topnav a:hover {
-  background: #d1d5db;
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
-/* HERO */
+/* HERO IN COLONNA */
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.4fr);
-  gap: 30px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   margin-bottom: 26px;
 }
 
@@ -95,7 +104,7 @@ body {
   background: #e0f2fe;
   color: #0f172a;
   font-size: 0.78rem;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hero-badge span {
@@ -117,67 +126,24 @@ body {
 .hero-subtitle {
   font-size: 0.98rem;
   color: #4b5563;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .hero-body {
   font-size: 0.98rem;
   color: #4b5563;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 }
 
-.hero-meta {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-top: 10px;
-}
-
-/* BOTTONI */
-.btn-primary,
-.btn-secondary {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.55);
-}
-
-.btn-primary:hover {
-  filter: brightness(1.05);
-}
-
-.btn-secondary {
-  margin-top: 8px;
-  background: #e5e7eb;
-  color: #111827;
-}
-
-.btn-secondary:hover {
-  background: #d1d5db;
-}
-
-/* SLIDER SCHERMATE */
+/* SLIDER SCHERMATE – quasi tutta la larghezza del contenitore */
 .hero-screens {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 4px;
 }
 
 .slider {
   position: relative;
   width: 100%;
-  max-width: 560px;          /* screenshot più grandi */
+  max-width: 100%;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.55);
@@ -217,6 +183,56 @@ body {
 
 .dot.active {
   background: #2563eb;
+}
+
+/* BLOCCO DOWNLOAD HERO */
+.hero-download {
+  margin-top: 10px;
+}
+
+.pricing {
+  font-size: 0.95rem;
+  color: #1f2933;
+  margin: 6px 0 10px;
+}
+
+.hero-meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+/* BOTTONI */
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.55);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  margin-top: 8px;
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
 }
 
 /* SEZIONI TESTO */
@@ -283,26 +299,19 @@ body {
 @media (max-width: 900px) {
   .page {
     margin: 12px;
-    padding: 18px 16px 22px;
+    padding: 18px 14px 22px;
   }
 
   .topbar {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-screens {
-    margin-top: 8px;
+    position: static;
+    margin: -4px -4px 16px;
   }
 }
 
 @media (max-width: 600px) {
   .slider {
-    max-width: 100%;
     border-radius: 16px;
   }
 }
