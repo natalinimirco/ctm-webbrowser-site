@@ -9,6 +9,48 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+
+  <!-- Stili per le card delle recensioni (coerenti con acquista.html) -->
+  <style>
+    .reviews-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .review-card {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      background-color: #f6f7fb;
+      border: 1px solid #e0e3f0;
+    }
+
+    .review-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .review-card-date {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .review-card-body {
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+    }
+
+    .reviews-placeholder {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,11 +58,12 @@
 
   <!-- TOP BAR -->
   <header class="topbar">
-        <nav class="topnav">
+    <nav class="topnav">
       <a href="#funzioni">Funzioni</a>
       <a href="#perche-ctm">Perché CTM</a>
       <a href="#download">Download</a>
       <a href="#requisiti">Requisiti</a>
+      <a href="#recensioni">Recensioni</a>
       <a href="#contatti">Contatti</a>
     </nav>
   </header>
@@ -157,6 +200,25 @@
       </ul>
     </section>
 
+    <!-- RECENSIONI IN HOME -->
+    <section class="section" id="recensioni">
+      <h2>Recensioni degli utilizzatori</h2>
+      <p class="note">
+        Le recensioni qui sotto sono salvate localmente sul tuo browser dopo l’invio dalla pagina
+        <a href="acquista.html">“Acquista licenza”</a>. Una selezione di recensioni potrà essere riportata
+        in forma stabile sul sito dopo verifica da parte dell’autore.
+      </p>
+      <div class="reviews-list" id="reviews-list-home">
+        <!-- recensioni locali -->
+      </div>
+      <div class="reviews-placeholder" id="reviews-placeholder-home">
+        <p class="note">
+          Non risultano recensioni inserite da questo browser.
+          Puoi lasciare la tua recensione dalla pagina <a href="acquista.html">“Acquista licenza”</a>.
+        </p>
+      </div>
+    </section>
+
     <!-- CONTATTI -->
     <section class="section" id="contatti">
       <h2>Contatti</h2>
@@ -184,7 +246,6 @@
     var slides = document.querySelectorAll('.slide');
     var prevBtn = document.querySelector('.slider-arrow.left');
     var nextBtn = document.querySelector('.slider-arrow.right');
-    if (!slides.length || !prevBtn || !nextBtn) return;
 
     var current = 0;
     var timer = null;
@@ -218,27 +279,85 @@
       }
     }
 
-    nextBtn.addEventListener('click', function () {
-      nextSlide();
-      startAuto();
-    });
-
-    prevBtn.addEventListener('click', function () {
-      prevSlide();
-      startAuto();
-    });
-
-    // avvio
-    showSlide(0);
-    startAuto();
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        stopAuto();
-      } else {
+    if (slides.length && prevBtn && nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        nextSlide();
         startAuto();
+      });
+
+      prevBtn.addEventListener('click', function () {
+        prevSlide();
+        startAuto();
+      });
+
+      // avvio slider
+      showSlide(0);
+      startAuto();
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          stopAuto();
+        } else {
+          startAuto();
+        }
+      });
+    }
+
+    // --- RECENSIONI IN HOME (solo lettura da localStorage) ---
+    var reviewsKey = 'ctm_webbrowser_reviews';
+    var listHome = document.getElementById('reviews-list-home');
+    var placeholderHome = document.getElementById('reviews-placeholder-home');
+
+    function loadReviewsHome() {
+      try {
+        var raw = localStorage.getItem(reviewsKey);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) return arr;
+        return [];
+      } catch (e) {
+        return [];
       }
-    });
+    }
+
+    function renderReviewsHome() {
+      var reviews = loadReviewsHome();
+      listHome.innerHTML = '';
+      if (!reviews.length) {
+        if (placeholderHome) placeholderHome.style.display = 'block';
+        return;
+      }
+      if (placeholderHome) placeholderHome.style.display = 'none';
+
+      reviews.forEach(function (r) {
+        var card = document.createElement('div');
+        card.className = 'review-card';
+
+        var header = document.createElement('div');
+        header.className = 'review-card-header';
+
+        var userSpan = document.createElement('span');
+        userSpan.textContent = r.user || 'Utente anonimo';
+
+        var dateSpan = document.createElement('span');
+        dateSpan.className = 'review-card-date';
+        dateSpan.textContent = r.date || '';
+
+        header.appendChild(userSpan);
+        header.appendChild(dateSpan);
+
+        var body = document.createElement('div');
+        body.className = 'review-card-body';
+        body.textContent = r.text || '';
+
+        card.appendChild(header);
+        card.appendChild(body);
+
+        listHome.appendChild(card);
+      });
+    }
+
+    renderReviewsHome();
   });
 </script>
 
