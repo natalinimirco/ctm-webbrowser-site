@@ -255,124 +255,6 @@
         </p>
       </form>
     </section>
-
-    <!-- RECENSIONI -->
-    <section class="section" id="recensioni">
-      <h2>Recensioni degli utilizzatori</h2>
-      <p>
-        Qui puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
-        Compila i campi seguenti e clicca su
-        <strong>“Pubblica la tua recensione ⭐”</strong>.
-      </p>
-
-      <div class="review-form">
-        <div class="form-row">
-          <div class="form-field">
-            <label for="rec-utente">Utente</label>
-            <input id="rec-utente" type="text" placeholder="Studio Rossi / Mario R." />
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="rec-testo">Recensione</label>
-          <textarea id="rec-testo" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..."></textarea>
-        </div>
-        <button type="button" class="btn-primary" id="btn-rec-pubblica">
-          Pubblica la tua recensione ⭐
-        </button>
-        <p class="note">
-          Le recensioni inserite vengono salvate localmente nel tuo browser e mostrate nello spazio qui sotto.
-          In una fase successiva, una selezione delle recensioni potrà essere riportata sul sito ufficiale previa verifica da parte dell’autore.
-        </p>
-      </div>
-
-      <div class="reviews-list" id="reviews-list">
-        <!-- recensioni renderizzate via JS -->
-      </div>
-
-      <div class="reviews-placeholder" id="reviews-placeholder">
-        <p class="note">
-          Nessuna recensione inserita in questa sessione. Compila i campi qui sopra per aggiungere la tua.
-        </p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
-  </footer>
-
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var yearSpan = document.getElementById('year');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
-
-    // --- COPIA DATI FATTURAZIONE PER EMAIL ---
-    var btnCopy = document.getElementById('btn-copy-billing');
-    if (btnCopy) {
-      btnCopy.addEventListener('click', function () {
-        var nome = document.getElementById('nome')?.value || '';
-        var cognome = document.getElementById('cognome')?.value || '';
-        var ragione = document.getElementById('ragione')?.value || '';
-        var indirizzo = document.getElementById('indirizzo')?.value || '';
-        var piva = document.getElementById('piva')?.value || '';
-        var cfisc = document.getElementById('cfisc')?.value || '';
-        var email = document.getElementById('email')?.value || '';
-        var telefono = document.getElementById('telefono')?.value || '';
-        var note = document.getElementById('note')?.value || '';
-
-        var lines = [];
-        lines.push('Richiesta fattura CTM WebBrowser');
-        lines.push('');
-        lines.push('Nome: ' + nome);
-        lines.push('Cognome: ' + cognome);
-        lines.push('Ragione sociale: ' + ragione);
-        lines.push('Indirizzo: ' + indirizzo);
-        lines.push('Partita IVA: ' + piva);
-        lines.push('Codice fiscale: ' + cfisc);
-        lines.push('Email per invio fattura: ' + email);
-        lines.push('Telefono: ' + telefono);
-        lines.push('');
-        lines.push('Note aggiuntive:');
-        lines.push(note || '-');
-        lines.push('');
-        lines.push('---');
-        lines.push('Pagamento già eseguito. Allego alla presente la ricevuta di bonifico/PayPal.');
-
-        var textToCopy = lines.join('\n');
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(textToCopy).then(function () {
-            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
-          }).catch(function () {
-            fallbackCopy(textToCopy);
-          });
-        } else {
-          fallbackCopy(textToCopy);
-        }
-      });
-    }
-
-    function fallbackCopy(text) {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      try {
-        document.execCommand('copy');
-        alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
-      } catch (e) {
-        alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
-      }
-      document.body.removeChild(ta);
-    }
     <!-- RECENSIONI -->
     <section class="section" id="recensioni">
       <h2>Recensioni degli utilizzatori</h2>
@@ -425,3 +307,106 @@
         </p>
       </div>
     </section>
+    // --- GESTIONE RECENSIONI (locale + invio via FormSubmit) ---
+    var reviewsKey = 'ctm_webbrowser_reviews';
+    var reviewsListEl = document.getElementById('reviews-list');
+    var reviewsPlaceholderEl = document.getElementById('reviews-placeholder');
+    var reviewForm = document.getElementById('review-form');
+
+    function loadReviews() {
+      try {
+        var raw = localStorage.getItem(reviewsKey);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) return arr;
+        return [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveReviews(arr) {
+      try {
+        localStorage.setItem(reviewsKey, JSON.stringify(arr));
+      } catch (e) {
+        // ignoriamo errori di quota
+      }
+    }
+
+    function renderReviews() {
+      var reviews = loadReviews();
+      reviewsListEl.innerHTML = '';
+      if (reviews.length === 0) {
+        if (reviewsPlaceholderEl) {
+          reviewsPlaceholderEl.style.display = 'block';
+        }
+        return;
+      }
+      if (reviewsPlaceholderEl) {
+        reviewsPlaceholderEl.style.display = 'none';
+      }
+      reviews.forEach(function (r) {
+        var card = document.createElement('div');
+        card.className = 'review-card';
+
+        var header = document.createElement('div');
+        header.className = 'review-card-header';
+
+        var userSpan = document.createElement('span');
+        userSpan.textContent = r.user || 'Utente anonimo';
+
+        var dateSpan = document.createElement('span');
+        dateSpan.className = 'review-card-date';
+        dateSpan.textContent = r.date || '';
+
+        header.appendChild(userSpan);
+        header.appendChild(dateSpan);
+
+        var body = document.createElement('div');
+        body.className = 'review-card-body';
+        body.textContent = r.text || '';
+
+        card.appendChild(header);
+        card.appendChild(body);
+
+        reviewsListEl.appendChild(card);
+      });
+    }
+
+    if (reviewForm) {
+      reviewForm.addEventListener('submit', function (e) {
+        // Prima gestiamo il salvataggio locale + render
+        var userEl = document.getElementById('rec-utente');
+        var textEl = document.getElementById('rec-testo');
+        var user = userEl ? userEl.value.trim() : '';
+        var text = textEl ? textEl.value.trim() : '';
+
+        if (!user || !text) {
+          e.preventDefault();
+          alert('Per pubblicare una recensione compila sia il campo "Utente" sia il campo "Recensione".');
+          return;
+        }
+
+        var reviews = loadReviews();
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('it-IT', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+
+        reviews.unshift({
+          user: user,
+          text: text,
+          date: dateStr
+        });
+
+        saveReviews(reviews);
+        renderReviews();
+
+        // Lasciamo proseguire l'invio del form verso FormSubmit (niente preventDefault)
+        alert('Grazie! La tua recensione è stata inviata e viene mostrata qui sotto.\nUna selezione potrà essere pubblicata ufficialmente dopo verifica.');
+      });
+    }
+
+    renderReviews();
