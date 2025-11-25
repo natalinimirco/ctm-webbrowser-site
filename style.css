@@ -45,18 +45,6 @@ body {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
   backdrop-filter: blur(14px);
 }
-
-.logo-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15, 23, 42, 0.25);
-  color: #e5e7eb;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-}
-
 .logo-mark {
   font-weight: 700;
   font-size: 0.9rem;
@@ -343,6 +331,7 @@ body {
     border-radius: 16px;
   }
 }
+
 
 
 
