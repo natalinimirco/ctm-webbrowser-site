@@ -255,6 +255,7 @@
         </p>
       </form>
     </section>
+
     <!-- RECENSIONI -->
     <section class="section" id="recensioni">
       <h2>Recensioni degli utilizzatori</h2>
@@ -274,8 +275,8 @@
         <input type="hidden" name="_subject" value="Nuova recensione CTM WebBrowser">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <!-- dopo invio, resta sulla stessa pagina (nessun redirect esterno) -->
-        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/pagamenti.html#recensioni">
+        <!-- dopo invio torna alla stessa pagina, sezione recensioni -->
+        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/acquista.html#recensioni">
 
         <div class="form-row">
           <div class="form-field">
@@ -307,7 +308,86 @@
         </p>
       </div>
     </section>
-    
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // anno footer
+    var yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- COPIA DATI FATTURAZIONE PER EMAIL ---
+    var btnCopy = document.getElementById('btn-copy-billing');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function () {
+        var nome = document.getElementById('nome')?.value || '';
+        var cognome = document.getElementById('cognome')?.value || '';
+        var ragione = document.getElementById('ragione')?.value || '';
+        var indirizzo = document.getElementById('indirizzo')?.value || '';
+        var piva = document.getElementById('piva')?.value || '';
+        var cfisc = document.getElementById('cfisc')?.value || '';
+        var email = document.getElementById('email')?.value || '';
+        var telefono = document.getElementById('telefono')?.value || '';
+        var note = document.getElementById('note')?.value || '';
+
+        var lines = [];
+        lines.push('Richiesta fattura CTM WebBrowser');
+        lines.push('');
+        lines.push('Nome: ' + nome);
+        lines.push('Cognome: ' + cognome);
+        lines.push('Ragione sociale: ' + ragione);
+        lines.push('Indirizzo: ' + indirizzo);
+        lines.push('Partita IVA: ' + piva);
+        lines.push('Codice fiscale: ' + cfisc);
+        lines.push('Email per invio fattura: ' + email);
+        lines.push('Telefono: ' + telefono);
+        lines.push('');
+        lines.push('Note aggiuntive:');
+        lines.push(note || '-');
+        lines.push('');
+        lines.push('---');
+        lines.push('Pagamento già eseguito. Allego alla presente la ricevuta di bonifico/PayPal.');
+
+        var textToCopy = lines.join('\n');
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(function () {
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          }).catch(function () {
+            fallbackCopy(textToCopy);
+          });
+        } else {
+          fallbackCopy(textToCopy);
+        }
+      });
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+      } catch (e) {
+        alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
+      }
+      document.body.removeChild(ta);
+    }
+
     // --- GESTIONE RECENSIONI (locale + invio via FormSubmit) ---
     var reviewsKey = 'ctm_webbrowser_reviews';
     var reviewsListEl = document.getElementById('reviews-list');
@@ -376,7 +456,6 @@
 
     if (reviewForm) {
       reviewForm.addEventListener('submit', function (e) {
-        // Prima gestiamo il salvataggio locale + render
         var userEl = document.getElementById('rec-utente');
         var textEl = document.getElementById('rec-testo');
         var user = userEl ? userEl.value.trim() : '';
@@ -405,10 +484,13 @@
         saveReviews(reviews);
         renderReviews();
 
-        // Lasciamo proseguire l'invio del form verso FormSubmit (niente preventDefault)
         alert('Grazie! La tua recensione è stata inviata e viene mostrata qui sotto.\nUna selezione potrà essere pubblicata ufficialmente dopo verifica.');
       });
     }
 
     renderReviews();
+  });
+</script>
 
+</body>
+</html>
