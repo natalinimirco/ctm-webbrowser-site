@@ -50,7 +50,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #0f172a;
+  background: rgba(15, 23, 42, 0.25);
   color: #e5e7eb;
   padding: 6px 12px;
   border-radius: 999px;
@@ -235,7 +235,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #2563eb, #3f63c9)
   color: #ffffff;
   box-shadow: 0 10px 26px rgba(37, 99, 235, 0.55);
 }
@@ -343,3 +343,4 @@ body {
     border-radius: 16px;
   }
 }
+
