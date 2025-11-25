@@ -15,3 +15,4 @@ Sito ufficiale del software **CTM WebBrowser**.
 2. Le versioni del software sono distribuite come asset delle *GitHub Releases*.
 3. Per aggiornare il link di download, sostituire l’URL nel `index.html`.
 
+
