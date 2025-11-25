@@ -186,7 +186,7 @@ body {
 
 .pricing {
   font-size: 0.95rem;
-  color: #1f2933;
+  color: #4b5563;
   margin: 6px 0 10px;
 }
 
@@ -217,7 +217,7 @@ body {
 
 .hero-meta {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: #4b5563;
   margin-top: 10px;
 }
 
@@ -343,5 +343,6 @@ body {
     border-radius: 16px;
   }
 }
+
 
 
