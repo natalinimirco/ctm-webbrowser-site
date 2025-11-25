@@ -14,3 +14,4 @@ Sito ufficiale del software **CTM WebBrowser**.
    https://mirconatalini.github.io/ctm-webbrowser-site/
 2. Le versioni del software sono distribuite come asset delle *GitHub Releases*.
 3. Per aggiornare il link di download, sostituire l’URL nel `index.html`.
+
