@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="app_icon.ico" />
 
-  <!-- Stili per le card delle recensioni (coerenti con acquista.html) -->
+  <!-- Stili per le card delle recensioni -->
   <style>
     .reviews-list {
       margin-top: 1.5rem;
@@ -47,8 +47,56 @@
       white-space: pre-wrap;
     }
 
-    .reviews-placeholder {
-      margin-top: 1rem;
+    .review-form input,
+    .review-form textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #cfcfcf;
+      background-color: #f7f7f7;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.95rem;
+      color: #333;
+      box-sizing: border-box;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .review-form input::placeholder,
+    .review-form textarea::placeholder {
+      color: #9b9b9b;
+    }
+
+    .review-form input:focus,
+    .review-form textarea:focus {
+      outline: none;
+      border-color: #888;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #4b7bec, #3867d6);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(56, 103, 214, 0.3);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(56, 103, 214, 0.35);
+      opacity: 0.95;
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(56, 103, 214, 0.25);
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -202,19 +250,67 @@
 
     <!-- RECENSIONI IN HOME -->
     <section class="section" id="recensioni">
-      <h2>Recensioni degli utilizzatori</h2>
-      <p class="note">
-        Le recensioni qui sotto sono salvate localmente sul tuo browser dopo l’invio dalla pagina
-        <a href="acquista.html">“Acquista licenza”</a>. Una selezione di recensioni potrà essere riportata
-        in forma stabile sul sito dopo verifica da parte dell’autore.
+      <h2>Recensioni degli utilizzatori ⭐</h2>
+      <p>
+        Puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser direttamente da qui.
+        Compila i campi e clicca su
+        <strong>“Pubblica la tua recensione ⭐”</strong>:
+        la recensione verrà inviata via mail all’autore e, se approvata, potrà essere pubblicata in questa sezione.
       </p>
+
+      <!-- FORM RECENSIONI collegato a FormSubmit -->
+      <form class="review-form"
+            id="review-form-home"
+            action="https://formsubmit.co/ctmbrowser@gmail.com"
+            method="POST">
+
+        <!-- Opzioni FormSubmit -->
+        <input type="hidden" name="_subject" value="Nuova recensione CTM WebBrowser (da homepage)">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- dopo invio torna alla homepage, sezione recensioni -->
+        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/#recensioni">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="rec-utente-home">Utente</label>
+            <input id="rec-utente-home" name="utente" type="text" placeholder="Studio Rossi / Mario R." required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rec-testo-home">Recensione</label>
+          <textarea id="rec-testo-home" name="recensione" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">
+          Pubblica la tua recensione ⭐
+        </button>
+      </form>
+
+      <p class="note" style="margin-top: 1rem;">
+        Le recensioni sottostanti sono state approvate e inserite manualmente dall’autore del software
+        sulla base dei contributi ricevuti via email.
+      </p>
+
       <div class="reviews-list" id="reviews-list-home">
-        <!-- recensioni locali -->
+        <!-- ESEMPIO DI RECENSIONE APPROVATA (puoi duplicare questo blocco) -->
+        <!--
+        <div class="review-card">
+          <div class="review-card-header">
+            <span>Studio Tecnico Rossi</span>
+            <span class="review-card-date">25/11/2025</span>
+          </div>
+          <div class="review-card-body">
+            Ottimo strumento per tenere sotto controllo getti, scadenze e prove di laboratorio.
+            Interfaccia semplice e allineata alle esigenze di uno studio di ingegneria.
+          </div>
+        </div>
+        -->
       </div>
+
       <div class="reviews-placeholder" id="reviews-placeholder-home">
         <p class="note">
-          Non risultano recensioni inserite da questo browser.
-          Puoi lasciare la tua recensione dalla pagina <a href="acquista.html">“Acquista licenza”</a>.
+          Non sono ancora state pubblicate recensioni ufficiali.
+          Puoi lasciare la tua recensione utilizzando il form qui sopra.
         </p>
       </div>
     </section>
@@ -303,61 +399,14 @@
       });
     }
 
-    // --- RECENSIONI IN HOME (solo lettura da localStorage) ---
-    var reviewsKey = 'ctm_webbrowser_reviews';
+    // placeholder recensioni: se aggiungi almeno una review-card manualmente, nascondi il placeholder
     var listHome = document.getElementById('reviews-list-home');
     var placeholderHome = document.getElementById('reviews-placeholder-home');
-
-    function loadReviewsHome() {
-      try {
-        var raw = localStorage.getItem(reviewsKey);
-        if (!raw) return [];
-        var arr = JSON.parse(raw);
-        if (Array.isArray(arr)) return arr;
-        return [];
-      } catch (e) {
-        return [];
+    if (listHome && placeholderHome) {
+      if (listHome.children.length > 0) {
+        placeholderHome.style.display = 'none';
       }
     }
-
-    function renderReviewsHome() {
-      var reviews = loadReviewsHome();
-      listHome.innerHTML = '';
-      if (!reviews.length) {
-        if (placeholderHome) placeholderHome.style.display = 'block';
-        return;
-      }
-      if (placeholderHome) placeholderHome.style.display = 'none';
-
-      reviews.forEach(function (r) {
-        var card = document.createElement('div');
-        card.className = 'review-card';
-
-        var header = document.createElement('div');
-        header.className = 'review-card-header';
-
-        var userSpan = document.createElement('span');
-        userSpan.textContent = r.user || 'Utente anonimo';
-
-        var dateSpan = document.createElement('span');
-        dateSpan.className = 'review-card-date';
-        dateSpan.textContent = r.date || '';
-
-        header.appendChild(userSpan);
-        header.appendChild(dateSpan);
-
-        var body = document.createElement('div');
-        body.className = 'review-card-body';
-        body.textContent = r.text || '';
-
-        card.appendChild(header);
-        card.appendChild(body);
-
-        listHome.appendChild(card);
-      });
-    }
-
-    renderReviewsHome();
   });
 </script>
 
