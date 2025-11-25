@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,106 @@
         content="Acquisto licenza CTM WebBrowser: modalità di pagamento e dati per la fatturazione.">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+
+  <!-- Stile extra per ammorbidire campi e bottoni -->
+  <style>
+    .billing-form input,
+    .billing-form textarea,
+    .review-form input,
+    .review-form textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #cfcfcf;
+      background-color: #f7f7f7;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.95rem;
+      color: #333;
+      box-sizing: border-box;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .billing-form input::placeholder,
+    .billing-form textarea::placeholder,
+    .review-form input::placeholder,
+    .review-form textarea::placeholder {
+      color: #9b9b9b;
+    }
+
+    .billing-form input:focus,
+    .billing-form textarea:focus,
+    .review-form input:focus,
+    .review-form textarea:focus {
+      outline: none;
+      border-color: #888;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #4b7bec, #3867d6);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(56, 103, 214, 0.3);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(56, 103, 214, 0.35);
+      opacity: 0.95;
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(56, 103, 214, 0.25);
+      opacity: 0.9;
+    }
+
+    .reviews-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .review-card {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      background-color: #f6f7fb;
+      border: 1px solid #e0e3f0;
+    }
+
+    .review-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .review-card-date {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .review-card-body {
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+    }
+
+    .reviews-placeholder {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -43,8 +143,9 @@
       </ul>
       <p>
         Prezzo di listino: <strong>49,90 €</strong> per postazione;<br>
-        prezzo di lancio: <strong>29,90 €</strong> per postazione
+        Prezzo di lancio: <strong>29,90 €</strong> per postazione
         (oltre IVA se applicabile).
+        <br>Se si desidera una versione trial del programma per apprezzarne tutte le funzionalità si può richiedere la licenza 24h all'indirizzo mail: ctmbrowser@gmail.com
       </p>
     </section>
 
@@ -57,8 +158,8 @@
       <ul class="info-list">
         <li>intestatario: nome e cognome professionista/società (da definire);</li>
         <li>IBAN: <strong>IT60X0000000000000000000000</strong> (esempio, da sostituire con quello reale);</li>
-        <li>importo: <strong>29,90 €</strong> per licenza singola (oltre IVA se applicabile);</li>
-        <li>causale: <strong>“CTM WebBrowser – licenza singola – [nome cognome / studio]”</strong>.</li>
+        <li>importo: <strong>29,90 € (prezzo di lancio)</strong> per licenza singola (oltre IVA se applicabile);</li>
+        <li>causale: <strong>“Licenza CTM – [nome cognome / studio]”</strong>.</li>
       </ul>
       <p class="note">
         Dopo il pagamento invia una mail con la ricevuta e i dati di fatturazione a
@@ -87,12 +188,13 @@
     <section class="section" id="fatturazione">
       <h2>Dati per la fatturazione</h2>
       <p>
-        Compila i dati seguenti e inviali via mail insieme alla conferma di pagamento.
-        Puoi copiare e incollare lo schema in un messaggio a
+        Compila i dati seguenti. Al termine, puoi usare il pulsante
+        <strong>“Copia dati per email”</strong> per copiare automaticamente tutti i campi
+        nel tuo appunto: ti basterà incollare (Ctrl+V) il testo nel corpo della mail da inviare a
         <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
       </p>
 
-      <form class="billing-form">
+      <form class="billing-form" onsubmit="return false;">
         <div class="form-row">
           <div class="form-field">
             <label for="nome">Nome</label>
@@ -138,12 +240,18 @@
 
         <div class="form-field">
           <label for="note">Note aggiuntive</label>
-          <textarea id="note" rows="3" placeholder="Eventuali riferimenti ordine, CIG/CUP, indicazioni particolari..."></textarea>
+          <textarea id="note" rows="3" placeholder="SDI per fatturazione, eventuali riferimenti ordine o altre note utili"></textarea>
         </div>
 
+        <button type="button" class="btn-primary" id="btn-copy-billing">
+          Copia dati per email
+        </button>
+
         <p class="note">
-          Questo form è solo dimostrativo e non invia dati automaticamente.
-          Utilizzalo come promemoria per i campi da riportare nella mail di richiesta fattura.
+          Questo form non invia automaticamente alcun dato: serve solo come promemoria.
+          Dopo aver compilato i campi, clicca su “Copia dati per email”, poi incolla il testo
+          nel corpo del messaggio che invierai a <strong>ctmbrowser@gmail.com</strong>,
+          allegando la ricevuta di pagamento.
         </p>
       </form>
     </section>
@@ -152,15 +260,38 @@
     <section class="section" id="recensioni">
       <h2>Recensioni degli utilizzatori</h2>
       <p>
-        Di seguito uno spazio dedicato a breve commento sull’esperienza d’uso da parte di chi utilizza CTM WebBrowser
-        in studio o in laboratorio. Le recensioni possono essere inviate via mail e, previa autorizzazione,
-        pubblicate in forma sintetica.
+        Qui puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
+        Compila i campi seguenti e clicca su
+        <strong>“Pubblica la tua recensione ⭐”</strong>.
       </p>
 
-      <div class="reviews-placeholder">
+      <div class="review-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="rec-utente">Utente</label>
+            <input id="rec-utente" type="text" placeholder="Studio Rossi / Mario R." />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rec-testo">Recensione</label>
+          <textarea id="rec-testo" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..."></textarea>
+        </div>
+        <button type="button" class="btn-primary" id="btn-rec-pubblica">
+          Pubblica la tua recensione ⭐
+        </button>
         <p class="note">
-          Nessuna recensione pubblicata al momento. Le testimonianze potranno essere inserite qui a seguito
-          di autorizzazione da parte dei clienti.
+          Le recensioni inserite vengono salvate localmente nel tuo browser e mostrate nello spazio qui sotto.
+          In una fase successiva, una selezione delle recensioni potrà essere riportata sul sito ufficiale previa verifica da parte dell’autore.
+        </p>
+      </div>
+
+      <div class="reviews-list" id="reviews-list">
+        <!-- recensioni renderizzate via JS -->
+      </div>
+
+      <div class="reviews-placeholder" id="reviews-placeholder">
+        <p class="note">
+          Nessuna recensione inserita in questa sessione. Compila i campi qui sopra per aggiungere la tua.
         </p>
       </div>
     </section>
@@ -179,6 +310,171 @@
     if (yearSpan) {
       yearSpan.textContent = new Date().getFullYear();
     }
+
+    // --- COPIA DATI FATTURAZIONE PER EMAIL ---
+    var btnCopy = document.getElementById('btn-copy-billing');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function () {
+        var nome = document.getElementById('nome')?.value || '';
+        var cognome = document.getElementById('cognome')?.value || '';
+        var ragione = document.getElementById('ragione')?.value || '';
+        var indirizzo = document.getElementById('indirizzo')?.value || '';
+        var piva = document.getElementById('piva')?.value || '';
+        var cfisc = document.getElementById('cfisc')?.value || '';
+        var email = document.getElementById('email')?.value || '';
+        var telefono = document.getElementById('telefono')?.value || '';
+        var note = document.getElementById('note')?.value || '';
+
+        var lines = [];
+        lines.push('Richiesta fattura CTM WebBrowser');
+        lines.push('');
+        lines.push('Nome: ' + nome);
+        lines.push('Cognome: ' + cognome);
+        lines.push('Ragione sociale: ' + ragione);
+        lines.push('Indirizzo: ' + indirizzo);
+        lines.push('Partita IVA: ' + piva);
+        lines.push('Codice fiscale: ' + cfisc);
+        lines.push('Email per invio fattura: ' + email);
+        lines.push('Telefono: ' + telefono);
+        lines.push('');
+        lines.push('Note aggiuntive:');
+        lines.push(note || '-');
+        lines.push('');
+        lines.push('---');
+        lines.push('Pagamento già eseguito. Allego alla presente la ricevuta di bonifico/PayPal.');
+
+        var textToCopy = lines.join('\n');
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(function () {
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          }).catch(function () {
+            fallbackCopy(textToCopy);
+          });
+        } else {
+          fallbackCopy(textToCopy);
+        }
+      });
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+      } catch (e) {
+        alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // --- GESTIONE RECENSIONI (locale, via localStorage) ---
+    var reviewsKey = 'ctm_webbrowser_reviews';
+    var reviewsListEl = document.getElementById('reviews-list');
+    var reviewsPlaceholderEl = document.getElementById('reviews-placeholder');
+    var btnRec = document.getElementById('btn-rec-pubblica');
+
+    function loadReviews() {
+      try {
+        var raw = localStorage.getItem(reviewsKey);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) return arr;
+        return [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveReviews(arr) {
+      try {
+        localStorage.setItem(reviewsKey, JSON.stringify(arr));
+      } catch (e) {
+        // ignoriamo errori di quota
+      }
+    }
+
+    function renderReviews() {
+      var reviews = loadReviews();
+      reviewsListEl.innerHTML = '';
+      if (reviews.length === 0) {
+        if (reviewsPlaceholderEl) {
+          reviewsPlaceholderEl.style.display = 'block';
+        }
+        return;
+      }
+      if (reviewsPlaceholderEl) {
+        reviewsPlaceholderEl.style.display = 'none';
+      }
+      reviews.forEach(function (r) {
+        var card = document.createElement('div');
+        card.className = 'review-card';
+
+        var header = document.createElement('div');
+        header.className = 'review-card-header';
+
+        var userSpan = document.createElement('span');
+        userSpan.textContent = r.user || 'Utente anonimo';
+
+        var dateSpan = document.createElement('span');
+        dateSpan.className = 'review-card-date';
+        dateSpan.textContent = r.date || '';
+
+        header.appendChild(userSpan);
+        header.appendChild(dateSpan);
+
+        var body = document.createElement('div');
+        body.className = 'review-card-body';
+        body.textContent = r.text || '';
+
+        card.appendChild(header);
+        card.appendChild(body);
+
+        reviewsListEl.appendChild(card);
+      });
+    }
+
+    if (btnRec) {
+      btnRec.addEventListener('click', function () {
+        var user = document.getElementById('rec-utente')?.value.trim() || '';
+        var text = document.getElementById('rec-testo')?.value.trim() || '';
+
+        if (!user || !text) {
+          alert('Per pubblicare una recensione compila sia il campo "Utente" sia il campo "Recensione".');
+          return;
+        }
+
+        var reviews = loadReviews();
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('it-IT', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+
+        reviews.unshift({
+          user: user,
+          text: text,
+          date: dateStr
+        });
+
+        saveReviews(reviews);
+        renderReviews();
+
+        document.getElementById('rec-utente').value = '';
+        document.getElementById('rec-testo').value = '';
+
+        alert('Recensione inserita. Verrà mostrata in questa pagina sul tuo browser.\nUna selezione potrà essere riportata sul sito ufficiale previa verifica.');
+      });
+    }
+
+    renderReviews();
   });
 </script>
 
