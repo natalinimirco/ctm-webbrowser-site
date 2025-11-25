@@ -68,45 +68,6 @@
       box-shadow: 0 3px 8px rgba(56, 103, 214, 0.25);
       opacity: 0.9;
     }
-
-    .reviews-list {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .review-card {
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
-      background-color: #f6f7fb;
-      border: 1px solid #e0e3f0;
-    }
-
-    .review-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.25rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .review-card-date {
-      font-size: 0.8rem;
-      color: #777;
-    }
-
-    .review-card-body {
-      font-size: 0.9rem;
-      color: #444;
-      white-space: pre-wrap;
-    }
-
-    .reviews-placeholder {
-      margin-top: 1rem;
-    }
   </style>
 </head>
 <body>
@@ -189,8 +150,8 @@
       <h2>Dati per la fatturazione</h2>
       <p>
         Compila i dati seguenti. Al termine, puoi usare il pulsante
-        <strong>“Copia dati per email”</strong> per copiare automaticamente tutti i campi
-        nel tuo appunto: ti basterà incollare (Ctrl+V) il testo nel corpo della mail da inviare a
+        <strong>“Copia dati per email”</strong> per copiare automaticamente tutti i campi:
+        ti basterà incollare (Ctrl+V) il testo nel corpo della mail da inviare a
         <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
       </p>
 
@@ -258,9 +219,9 @@
 
     <!-- RECENSIONI -->
     <section class="section" id="recensioni">
-      <h2>Recensioni degli utilizzatori</h2>
+      <h2>Recensioni degli utilizzatori ⭐</h2>
       <p>
-        Qui puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
+        Puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
         Compila i campi seguenti e clicca su
         <strong>“Pubblica la tua recensione ⭐”</strong>.
       </p>
@@ -288,25 +249,14 @@
           <label for="rec-testo">Recensione</label>
           <textarea id="rec-testo" name="recensione" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..." required></textarea>
         </div>
-        <button type="submit" class="btn-primary" id="btn-rec-pubblica">
+        <button type="submit" class="btn-primary">
           Pubblica la tua recensione ⭐
         </button>
         <p class="note">
           La recensione verrà inviata all’autore del software via email. Una selezione delle recensioni,
-          dopo verifica, potrà essere pubblicata sul sito ufficiale. Sul tuo browser la recensione verrà
-          comunque mostrata nello spazio qui sotto (memorizzata in locale).
+          dopo verifica, potrà essere pubblicata nella sezione “Recensioni degli utilizzatori ⭐” in fondo alla homepage.
         </p>
       </form>
-
-      <div class="reviews-list" id="reviews-list">
-        <!-- recensioni renderizzate via JS -->
-      </div>
-
-      <div class="reviews-placeholder" id="reviews-placeholder">
-        <p class="note">
-          Nessuna recensione inserita in questa sessione. Compila i campi qui sopra per aggiungere la tua.
-        </p>
-      </div>
     </section>
 
   </main>
@@ -359,6 +309,23 @@
 
         var textToCopy = lines.join('\n');
 
+        function fallbackCopy(text) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          try {
+            document.execCommand('copy');
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          } catch (e) {
+            alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
+          }
+          document.body.removeChild(ta);
+        }
+
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(textToCopy).then(function () {
             alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
@@ -370,125 +337,6 @@
         }
       });
     }
-
-    function fallbackCopy(text) {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      try {
-        document.execCommand('copy');
-        alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
-      } catch (e) {
-        alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
-      }
-      document.body.removeChild(ta);
-    }
-
-    // --- GESTIONE RECENSIONI (locale + invio via FormSubmit) ---
-    var reviewsKey = 'ctm_webbrowser_reviews';
-    var reviewsListEl = document.getElementById('reviews-list');
-    var reviewsPlaceholderEl = document.getElementById('reviews-placeholder');
-    var reviewForm = document.getElementById('review-form');
-
-    function loadReviews() {
-      try {
-        var raw = localStorage.getItem(reviewsKey);
-        if (!raw) return [];
-        var arr = JSON.parse(raw);
-        if (Array.isArray(arr)) return arr;
-        return [];
-      } catch (e) {
-        return [];
-      }
-    }
-
-    function saveReviews(arr) {
-      try {
-        localStorage.setItem(reviewsKey, JSON.stringify(arr));
-      } catch (e) {
-        // ignoriamo errori di quota
-      }
-    }
-
-    function renderReviews() {
-      var reviews = loadReviews();
-      reviewsListEl.innerHTML = '';
-      if (reviews.length === 0) {
-        if (reviewsPlaceholderEl) {
-          reviewsPlaceholderEl.style.display = 'block';
-        }
-        return;
-      }
-      if (reviewsPlaceholderEl) {
-        reviewsPlaceholderEl.style.display = 'none';
-      }
-      reviews.forEach(function (r) {
-        var card = document.createElement('div');
-        card.className = 'review-card';
-
-        var header = document.createElement('div');
-        header.className = 'review-card-header';
-
-        var userSpan = document.createElement('span');
-        userSpan.textContent = r.user || 'Utente anonimo';
-
-        var dateSpan = document.createElement('span');
-        dateSpan.className = 'review-card-date';
-        dateSpan.textContent = r.date || '';
-
-        header.appendChild(userSpan);
-        header.appendChild(dateSpan);
-
-        var body = document.createElement('div');
-        body.className = 'review-card-body';
-        body.textContent = r.text || '';
-
-        card.appendChild(header);
-        card.appendChild(body);
-
-        reviewsListEl.appendChild(card);
-      });
-    }
-
-    if (reviewForm) {
-      reviewForm.addEventListener('submit', function (e) {
-        var userEl = document.getElementById('rec-utente');
-        var textEl = document.getElementById('rec-testo');
-        var user = userEl ? userEl.value.trim() : '';
-        var text = textEl ? textEl.value.trim() : '';
-
-        if (!user || !text) {
-          e.preventDefault();
-          alert('Per pubblicare una recensione compila sia il campo "Utente" sia il campo "Recensione".');
-          return;
-        }
-
-        var reviews = loadReviews();
-        var now = new Date();
-        var dateStr = now.toLocaleDateString('it-IT', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-        });
-
-        reviews.unshift({
-          user: user,
-          text: text,
-          date: dateStr
-        });
-
-        saveReviews(reviews);
-        renderReviews();
-
-        alert('Grazie! La tua recensione è stata inviata e viene mostrata qui sotto.\nUna selezione potrà essere pubblicata ufficialmente dopo verifica.');
-      });
-    }
-
-    renderReviews();
   });
 </script>
 
