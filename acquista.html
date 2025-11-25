@@ -373,110 +373,55 @@
       }
       document.body.removeChild(ta);
     }
+    <!-- RECENSIONI -->
+    <section class="section" id="recensioni">
+      <h2>Recensioni degli utilizzatori</h2>
+      <p>
+        Qui puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
+        Compila i campi seguenti e clicca su
+        <strong>“Pubblica la tua recensione ⭐”</strong>.
+      </p>
 
-    // --- GESTIONE RECENSIONI (locale, via localStorage) ---
-    var reviewsKey = 'ctm_webbrowser_reviews';
-    var reviewsListEl = document.getElementById('reviews-list');
-    var reviewsPlaceholderEl = document.getElementById('reviews-placeholder');
-    var btnRec = document.getElementById('btn-rec-pubblica');
+      <!-- FORM RECENSIONI collegato a FormSubmit -->
+      <form class="review-form"
+            id="review-form"
+            action="https://formsubmit.co/ctmbrowser@gmail.com"
+            method="POST">
 
-    function loadReviews() {
-      try {
-        var raw = localStorage.getItem(reviewsKey);
-        if (!raw) return [];
-        var arr = JSON.parse(raw);
-        if (Array.isArray(arr)) return arr;
-        return [];
-      } catch (e) {
-        return [];
-      }
-    }
+        <!-- Opzioni FormSubmit -->
+        <input type="hidden" name="_subject" value="Nuova recensione CTM WebBrowser">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- dopo invio, resta sulla stessa pagina (nessun redirect esterno) -->
+        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/pagamenti.html#recensioni">
 
-    function saveReviews(arr) {
-      try {
-        localStorage.setItem(reviewsKey, JSON.stringify(arr));
-      } catch (e) {
-        // ignoriamo errori di quota
-      }
-    }
+        <div class="form-row">
+          <div class="form-field">
+            <label for="rec-utente">Utente</label>
+            <input id="rec-utente" name="utente" type="text" placeholder="Studio Rossi / Mario R." required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rec-testo">Recensione</label>
+          <textarea id="rec-testo" name="recensione" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-rec-pubblica">
+          Pubblica la tua recensione ⭐
+        </button>
+        <p class="note">
+          La recensione verrà inviata all’autore del software via email. Una selezione delle recensioni,
+          dopo verifica, potrà essere pubblicata sul sito ufficiale. Sul tuo browser la recensione verrà
+          comunque mostrata nello spazio qui sotto (memorizzata in locale).
+        </p>
+      </form>
 
-    function renderReviews() {
-      var reviews = loadReviews();
-      reviewsListEl.innerHTML = '';
-      if (reviews.length === 0) {
-        if (reviewsPlaceholderEl) {
-          reviewsPlaceholderEl.style.display = 'block';
-        }
-        return;
-      }
-      if (reviewsPlaceholderEl) {
-        reviewsPlaceholderEl.style.display = 'none';
-      }
-      reviews.forEach(function (r) {
-        var card = document.createElement('div');
-        card.className = 'review-card';
+      <div class="reviews-list" id="reviews-list">
+        <!-- recensioni renderizzate via JS -->
+      </div>
 
-        var header = document.createElement('div');
-        header.className = 'review-card-header';
-
-        var userSpan = document.createElement('span');
-        userSpan.textContent = r.user || 'Utente anonimo';
-
-        var dateSpan = document.createElement('span');
-        dateSpan.className = 'review-card-date';
-        dateSpan.textContent = r.date || '';
-
-        header.appendChild(userSpan);
-        header.appendChild(dateSpan);
-
-        var body = document.createElement('div');
-        body.className = 'review-card-body';
-        body.textContent = r.text || '';
-
-        card.appendChild(header);
-        card.appendChild(body);
-
-        reviewsListEl.appendChild(card);
-      });
-    }
-
-    if (btnRec) {
-      btnRec.addEventListener('click', function () {
-        var user = document.getElementById('rec-utente')?.value.trim() || '';
-        var text = document.getElementById('rec-testo')?.value.trim() || '';
-
-        if (!user || !text) {
-          alert('Per pubblicare una recensione compila sia il campo "Utente" sia il campo "Recensione".');
-          return;
-        }
-
-        var reviews = loadReviews();
-        var now = new Date();
-        var dateStr = now.toLocaleDateString('it-IT', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-        });
-
-        reviews.unshift({
-          user: user,
-          text: text,
-          date: dateStr
-        });
-
-        saveReviews(reviews);
-        renderReviews();
-
-        document.getElementById('rec-utente').value = '';
-        document.getElementById('rec-testo').value = '';
-
-        alert('Recensione inserita. Verrà mostrata in questa pagina sul tuo browser.\nUna selezione potrà essere riportata sul sito ufficiale previa verifica.');
-      });
-    }
-
-    renderReviews();
-  });
-</script>
-
-</body>
-</html>
+      <div class="reviews-placeholder" id="reviews-placeholder">
+        <p class="note">
+          Nessuna recensione inserita in questa sessione. Compila i campi qui sopra per aggiungere la tua.
+        </p>
+      </div>
+    </section>
