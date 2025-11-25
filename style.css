@@ -223,9 +223,9 @@ body {
 }
 
 .btn-primary {
-  linear-gradient(62deg, #537162, #7d8fbd)
-  color: #ffffff;
-  box-shadow: 0 1px 6px rgb(34 39 32 / 55%);
+    box-shadow: 0 1px 6px #4b5563;
+    background: linear-gradient(135deg, #7397df, #7ed74785);
+    color: #252222;
 }
 
 .btn-primary:hover {
@@ -331,6 +331,7 @@ body {
     border-radius: 16px;
   }
 }
+
 
 
 
