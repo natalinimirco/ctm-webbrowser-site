@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informativa privacy · Concrete Test Manager (CTM) WebBrowser</title>
+  <meta name="description" content="Informativa privacy del sito e del software CTM WebBrowser.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <div class="logo-pill">
+      <span class="logo-mark">CTM</span>
+      <span class="logo-text">WebBrowser</span>
+    </div>
+    <nav class="topnav">
+      <a href="index.html#top">Torna al sito</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>Informativa privacy</h2>
+      <p class="note">Ultimo aggiornamento: 28/08/2026</p>
+
+      <p>Questa informativa descrive come vengono trattati i dati personali in relazione al
+         sito web CTM WebBrowser e al software desktop CTM WebBrowser.</p>
+
+      <h3>1. Titolare del trattamento</h3>
+      <p>Ing. Mirco Natalini — contatto: <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a></p>
+
+      <h3>2. Dati raccolti dal sito web</h3>
+      <ul class="info-list">
+        <li>Modulo recensioni e modulo di contatto: nome/utente indicato e testo del messaggio,
+            inviati tramite il servizio esterno FormSubmit direttamente alla mail del titolare.</li>
+        <li>Dati di fatturazione (pagina "Acquista licenza"): inseriti volontariamente dall'utente
+            e copiati manualmente in una mail inviata dall'utente stesso; il sito non li trasmette
+            né li memorizza automaticamente.</li>
+        <li>Il sito non utilizza cookie di profilazione né strumenti di tracciamento pubblicitario.</li>
+      </ul>
+
+      <h3>3. Dati trattati dal software CTM WebBrowser</h3>
+      <ul class="info-list">
+        <li>I dati inseriti nel software (getti, clienti, scadenze) sono salvati esclusivamente
+            in locale sul computer dell'utilizzatore e non vengono trasmessi al titolare né a terzi,
+            salvo utilizzo volontario delle funzioni opzionali di seguito descritte.</li>
+        <li>Fingerprint macchina: un identificativo tecnico del dispositivo, utilizzato solo per
+            l'attivazione della licenza, inviato dall'utente via email al titolare.</li>
+        <li>Integrazione Google Calendar (opzionale): se attivata dall'utente, il software crea
+            eventi sul calendario Google personale dell'utilizzatore. L'autorizzazione avviene
+            tramite il login ufficiale di Google (OAuth); il titolare del software non riceve né
+            memorizza le credenziali dell'account Google dell'utente. L'accesso richiesto è
+            limitato alla creazione di eventi di calendario (scope <code>calendar.events</code>).</li>
+      </ul>
+
+      <h3>4. Conservazione dei dati</h3>
+      <p>I messaggi ricevuti via email (recensioni, richieste di licenza, dati di fatturazione)
+         sono conservati nella casella di posta del titolare per il tempo necessario a fornire
+         assistenza e per gli adempimenti fiscali/contabili previsti dalla legge.</p>
+
+      <h3>5. Diritti dell'interessato</h3>
+      <p>È possibile richiedere in qualsiasi momento l'accesso, la rettifica o la cancellazione
+         dei propri dati scrivendo a <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</p>
+
+      <h3>6. Servizi di terze parti utilizzati</h3>
+      <ul class="info-list">
+        <li><strong>FormSubmit</strong> — inoltro dei moduli del sito via email.</li>
+        <li><strong>Google Calendar API</strong> — solo se l'utente attiva volontariamente
+            l'integrazione nel software.</li>
+        <li><strong>GitHub Pages</strong> — hosting del sito.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

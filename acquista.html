@@ -1,0 +1,288 @@
+<!DOCTYPE html> 
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acquista licenza · Concrete Test Manager (CTM) WebBrowser</title>
+  <meta name="description"
+        content="Acquisto licenza CTM WebBrowser: modalità di pagamento e dati per la fatturazione.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo-pill">
+      <span class="logo-mark">CTM</span>
+      <span class="logo-text">WebBrowser</span>
+    </div>
+    <nav class="topnav">
+      <a href="index.html#top">Torna al sito</a>
+      <a href="#pagamento">Pagamento</a>
+      <a href="#fatturazione">Dati fatturazione</a>
+      <a href="#recensioni">Recensioni</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="section">
+      <h2>Acquisto licenza CTM WebBrowser</h2>
+      <p>
+        La licenza di CTM WebBrowser è valida per <strong>una postazione</strong> con
+        <strong>licenza life-time</strong>. Nel prezzo sono compresi:
+      </p>
+      <ul class="info-list">
+        <li>utilizzo illimitato della versione acquistata;</li>
+        <li>aggiornamenti correttivi (bugfix) rilasciati per la stessa versione;</li>
+        <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+      </ul>
+      <p>
+        Prezzo di listino: <strong>49,90 €</strong> per postazione;<br>
+        Prezzo di lancio: <strong>29,90 €</strong> per postazione
+        (oltre IVA se applicabile).
+        <br>Se si desidera una versione trial del programma per apprezzarne tutte le funzionalità si può richiedere la licenza 24h all'indirizzo mail: ctmbrowser@gmail.com
+      </p>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <section class="section" id="pagamento">
+      <h2>Modalità di pagamento</h2>
+
+      <h3>Bonifico bancario</h3>
+      <p>Puoi effettuare il pagamento tramite bonifico utilizzando i dati seguenti:</p>
+      <ul class="info-list">
+      <!-- ⚠⚠⚠ TODO PRIMA DI PUBBLICARE: intestatario e IBAN qui sotto sono
+           PLACEHOLDER FITTIZI, mai sostituiti con i dati reali. ⚠⚠⚠ -->
+        <li>intestatario: nome e cognome professionista/società (da definire);</li>
+        <li>IBAN: <strong>IT60X0000000000000000000000</strong> (esempio, da sostituire con quello reale);</li>
+        <li>importo: <strong>29,90 € (prezzo di lancio)</strong> per licenza singola (oltre IVA se applicabile);</li>
+        <li>causale: <strong>“Licenza CTM – [nome cognome / studio]”</strong>.</li>
+      </ul>
+      <p class="note">
+        Dopo il pagamento invia una mail con la ricevuta e i dati di fatturazione a
+        <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+      </p>
+
+      <h3>PayPal</h3>
+      <p>
+        In alternativa puoi pagare tramite PayPal. Una volta configurato l’account,
+        il pagamento potrà essere effettuato verso l’indirizzo:
+      </p>
+      <p><strong>ctmbrowser@gmail.com</strong></p>
+      <p class="note">
+        Nella nota del pagamento indica sempre “CTM WebBrowser – licenza singola” e i dati dello studio.
+      </p>
+
+      <h3>Carta di credito</h3>
+      <p>
+        L’integrazione per il pagamento diretto con carta di credito potrà essere gestita tramite
+        piattaforma esterna (es. PayPal Checkout o altro gateway). In attesa dell’integrazione,
+        è possibile utilizzare carta di credito tramite PayPal.
+      </p>
+    </section>
+
+    <!-- DATI FATTURAZIONE -->
+    <section class="section" id="fatturazione">
+      <h2>Dati per la fatturazione</h2>
+      <p>
+        Compila i dati seguenti. Al termine, puoi usare il pulsante
+        <strong>“Copia dati per email”</strong> per copiare automaticamente tutti i campi:
+        ti basterà incollare (Ctrl+V) il testo nel corpo della mail da inviare a
+        <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+      </p>
+
+      <form class="billing-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" placeholder="Mario" />
+          </div>
+          <div class="form-field">
+            <label for="cognome">Cognome</label>
+            <input id="cognome" type="text" placeholder="Rossi" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="ragione">Ragione sociale (se presente)</label>
+          <input id="ragione" type="text" placeholder="Studio Tecnico Rossi" />
+        </div>
+
+        <div class="form-field">
+          <label for="indirizzo">Indirizzo di fatturazione</label>
+          <input id="indirizzo" type="text" placeholder="Via Esempio 1, CAP, Città (Provincia)" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="piva">Partita IVA</label>
+            <input id="piva" type="text" placeholder="IT12345678901" />
+          </div>
+          <div class="form-field">
+            <label for="cfisc">Codice fiscale</label>
+            <input id="cfisc" type="text" placeholder="RSSMRA80A01H501Z" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email per invio fattura</label>
+            <input id="email" type="email" placeholder="nome@studio.it" />
+          </div>
+          <div class="form-field">
+            <label for="telefono">Telefono (opzionale)</label>
+            <input id="telefono" type="tel" placeholder="+39 ..." />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="note">Note aggiuntive</label>
+          <textarea id="note" rows="3" placeholder="SDI per fatturazione, eventuali riferimenti ordine o altre note utili"></textarea>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-copy-billing">
+          Copia dati per email
+        </button>
+
+        <p class="note">
+          Questo form non invia automaticamente alcun dato: serve solo come promemoria.
+          Dopo aver compilato i campi, clicca su “Copia dati per email”, poi incolla il testo
+          nel corpo del messaggio che invierai a <strong>ctmbrowser@gmail.com</strong>,
+          allegando la ricevuta di pagamento.
+        </p>
+      </form>
+    </section>
+
+    <!-- RECENSIONI -->
+    <section class="section" id="recensioni">
+      <h2>Recensioni degli utilizzatori ⭐</h2>
+      <p>
+        Puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
+        Compila i campi seguenti e clicca su
+        <strong>“Pubblica la tua recensione ⭐”</strong>.
+      </p>
+
+      <!-- FORM RECENSIONI collegato a FormSubmit -->
+      <form class="review-form"
+            id="review-form"
+            action="https://formsubmit.co/ctmbrowser@gmail.com"
+            method="POST">
+
+        <!-- Opzioni FormSubmit -->
+        <input type="hidden" name="_subject" value="Nuova recensione CTM WebBrowser">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- dopo invio torna alla stessa pagina, sezione recensioni -->
+        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/acquista.html#recensioni">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="rec-utente">Utente</label>
+            <input id="rec-utente" name="utente" type="text" placeholder="Studio Rossi / Mario R." required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rec-testo">Recensione</label>
+          <textarea id="rec-testo" name="recensione" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">
+          Pubblica la tua recensione ⭐
+        </button>
+        <p class="note">
+          La recensione verrà inviata all’autore del software via email. Una selezione delle recensioni,
+          dopo verifica, potrà essere pubblicata nella sezione “Recensioni degli utilizzatori ⭐” in fondo alla homepage.
+        </p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+    <p><a href="privacy.html">Informativa privacy</a></p>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // anno footer
+    var yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- COPIA DATI FATTURAZIONE PER EMAIL ---
+    var btnCopy = document.getElementById('btn-copy-billing');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function () {
+        var nome = document.getElementById('nome')?.value || '';
+        var cognome = document.getElementById('cognome')?.value || '';
+        var ragione = document.getElementById('ragione')?.value || '';
+        var indirizzo = document.getElementById('indirizzo')?.value || '';
+        var piva = document.getElementById('piva')?.value || '';
+        var cfisc = document.getElementById('cfisc')?.value || '';
+        var email = document.getElementById('email')?.value || '';
+        var telefono = document.getElementById('telefono')?.value || '';
+        var note = document.getElementById('note')?.value || '';
+
+        var lines = [];
+        lines.push('Richiesta fattura CTM WebBrowser');
+        lines.push('');
+        lines.push('Nome: ' + nome);
+        lines.push('Cognome: ' + cognome);
+        lines.push('Ragione sociale: ' + ragione);
+        lines.push('Indirizzo: ' + indirizzo);
+        lines.push('Partita IVA: ' + piva);
+        lines.push('Codice fiscale: ' + cfisc);
+        lines.push('Email per invio fattura: ' + email);
+        lines.push('Telefono: ' + telefono);
+        lines.push('');
+        lines.push('Note aggiuntive:');
+        lines.push(note || '-');
+        lines.push('');
+        lines.push('---');
+        lines.push('Pagamento già eseguito. Allego alla presente la ricevuta di bonifico/PayPal.');
+
+        var textToCopy = lines.join('\n');
+
+        function fallbackCopy(text) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          try {
+            document.execCommand('copy');
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          } catch (e) {
+            alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
+          }
+          document.body.removeChild(ta);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(function () {
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          }).catch(function () {
+            fallbackCopy(textToCopy);
+          });
+        } else {
+          fallbackCopy(textToCopy);
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
