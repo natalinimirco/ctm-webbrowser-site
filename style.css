@@ -409,8 +409,21 @@ body {
   border-color: var(--navy-700);
 }
 
-.os-panel { display: none; width: 100%; min-width: 0; }
-.os-panel.on { display: block; }
+.os-panels { display: grid; width: 100%; }
+/* Entrambi i pannelli nella STESSA cella della griglia: la riga si
+   dimensiona sempre sul contenuto più alto (quello Mac, con la riga
+   "Chip sbagliato?" in più), anche quando è visibile solo quello Windows
+   — elimina il salto di layout al cambio scheda, invece di ridimensionare
+   il contenitore ogni volta in base al pannello effettivamente mostrato. */
+.os-panel {
+  grid-row: 1;
+  grid-column: 1;
+  width: 100%;
+  min-width: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.os-panel.on { visibility: visible; pointer-events: auto; }
 
 .os-panel .btn-primary { margin-right: 8px; }
 
@@ -454,6 +467,15 @@ body {
 .section p { margin: 6px 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
 
 .section p a, .note a { color: var(--navy-600); font-weight: 600; }
+/* I pulsanti (.btn-primary/.btn-secondary) devono restare leggibili anche
+   quando finiscono dentro un <p> di una sezione testuale (come qui): senza
+   queste regole, ".section p a" sopra vince per specificità CSS e riscrive
+   il colore del testo del pulsante col proprio, quasi invisibile sullo
+   sfondo del pulsante stesso in entrambi i casi (bianco su blu diventerebbe
+   blu su blu; il secondario ha invece sfondo chiaro e andrebbe rotto al
+   contrario se gli si desse lo stesso trattamento del primario). */
+.section p a.btn-primary { color: #ffffff; }
+.section p a.btn-secondary { color: var(--navy-700); }
 
 /* LISTE / ELENCHI */
 .feature-list,
