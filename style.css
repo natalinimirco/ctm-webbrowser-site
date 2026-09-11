@@ -710,6 +710,12 @@ body {
 
 .price-new span, .price-old span { font-size: 0.6em; font-weight: 600; color: var(--muted); }
 
+.price-fee-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: -4px 0 10px;
+}
+
 .price-card-desc {
   font-size: 0.85rem;
   color: var(--muted);
@@ -724,3 +730,33 @@ body {
 @media (max-width: 600px) {
   .price-card { width: 100%; max-width: 280px; }
 }
+
+/* BANNER "PROVALO GRATIS" — cattura l'attenzione prima ancora della scelta
+   del sistema operativo, altezza indicativamente simile a un pulsante di
+   download per restare in proporzione col resto del blocco. */
+.trial-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 8px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffd35c, #ffb300);
+  color: #4a3200;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 14px 26px;
+  border-radius: 999px;
+  margin: 0 auto 18px;
+  max-width: 560px;
+  box-shadow: 0 6px 16px rgba(255, 179, 0, 0.35);
+}
+
+.trial-banner strong { color: #2b1e00; }
+
+/* Centratura di schede OS e pulsante di download quando non sono più
+   affiancati all'immagine sconto (ora spostata più in basso, dentro le
+   card prezzo): prima di virgola erano allineati a sinistra dentro
+   .download-wrapper, ora vanno centrati sulla pagina. */
+.os-tabs-centered { justify-content: center; }
+.os-panels-centered { justify-items: center; text-align: center; }

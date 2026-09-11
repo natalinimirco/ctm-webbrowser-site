@@ -71,15 +71,51 @@
       </div>
     </div>
 
-    <!-- BLOCCO PREZZI -->
+    <!-- BLOCCO DOWNLOAD + PREZZI -->
     <div class="hero-download">
+
+      <div class="trial-banner">
+        🎉 <strong>Provalo ora, gratis!</strong> Tutte le funzioni sbloccate per 24 ore, senza registrazione né licenza.
+      </div>
+
+      <div class="os-tabs os-tabs-centered">
+        <button type="button" class="os-tab on" data-os="win" onclick="ctmSelectOs('win',this)">🪟 Windows</button>
+        <button type="button" class="os-tab" data-os="mac" onclick="ctmSelectOs('mac',this)">🍎 Mac</button>
+      </div>
+
+      <div id="os-panels" class="os-panels os-panels-centered">
+        <div id="os-panel-win" class="os-panel on">
+          <a class="btn-primary"
+             href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTM_WebBrowser_1.0_Setup.exe"
+             rel="noopener noreferrer"
+             download>
+            Scarica per Windows (.exe)
+          </a>
+        </div>
+
+        <div id="os-panel-mac" class="os-panel">
+          <a class="btn-primary" id="mac-primary-link"
+             href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_apple-silicon.zip"
+             rel="noopener noreferrer"
+             download>
+            Scarica per Mac
+          </a>
+          <p class="mac-arch-links">
+            Chip sbagliato? Verifica da menu Apple → "Informazioni su questo Mac":
+            <a href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_apple-silicon.zip" download>versione Apple Silicon (M1/M2/M3/M4)</a>
+            ·
+            <a href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_intel.zip" download>versione Intel</a>
+          </p>
+        </div>
+      </div>
+
       <p class="pricing">
         Due modalità di licenza, entrambe con aggiornamenti correttivi (bugfix)
         e assistenza via mail comprese. Offerta di lancio in corso su entrambe.
       </p>
 
       <div class="pricing-cards">
-        <div class="price-card">
+        <div class="price-card featured">
           <!-- ⚠ TODO: sostituire src="sconto.jpg" con src="sconto1.jpg"
                quando l'immagine dedicata all'offerta Annuale sarà pronta. -->
           <img class="offer-image" src="sconto.jpg"
@@ -87,6 +123,7 @@
           <h3>Annuale</h3>
           <p class="price-old">39,90 €<span>/anno</span></p>
           <p class="price-new">24,90 €<span>/anno</span></p>
+          <p class="price-fee-note">(oltre contributo cassa 4% e bollo € 2,00)</p>
           <p class="price-card-desc">Rinnovo ogni 12 mesi. Ideale per iniziare con il minimo impegno.</p>
           <a class="btn-primary" href="acquista.html?piano=annuale">Scegli Annuale</a>
         </div>
@@ -99,48 +136,9 @@
           <h3>Life-time</h3>
           <p class="price-old">69,90 €</p>
           <p class="price-new">39,90 €<span>una tantum</span></p>
+          <p class="price-fee-note">(oltre contributo cassa 4% e bollo € 2,00)</p>
           <p class="price-card-desc">Si paga una sola volta: nessun rinnovo da ricordare.</p>
           <a class="btn-primary" href="acquista.html?piano=lifetime">Scegli Life-time</a>
-        </div>
-      </div>
-
-      <div class="hero-cta">
-        <div class="download-wrapper download-wrapper-full">
-
-          <div class="os-tabs">
-            <button type="button" class="os-tab on" data-os="win" onclick="ctmSelectOs('win',this)">🪟 Windows</button>
-            <button type="button" class="os-tab" data-os="mac" onclick="ctmSelectOs('mac',this)">🍎 Mac</button>
-          </div>
-
-          <div id="os-panels" class="os-panels">
-            <div id="os-panel-win" class="os-panel on">
-              <a class="btn-primary"
-                 href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTM_WebBrowser_1.0_Setup.exe"
-                 rel="noopener noreferrer"
-                 download>
-                Scarica per Windows (.exe)
-              </a>
-            </div>
-
-            <div id="os-panel-mac" class="os-panel">
-              <a class="btn-primary" id="mac-primary-link"
-                 href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_apple-silicon.zip"
-                 rel="noopener noreferrer"
-                 download>
-                Scarica per Mac
-              </a>
-              <p class="mac-arch-links">
-                Chip sbagliato? Verifica da menu Apple → "Informazioni su questo Mac":
-                <a href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_apple-silicon.zip" download>versione Apple Silicon (M1/M2/M3/M4)</a>
-                ·
-                <a href="https://github.com/natalinimirco/ctm-webbrowser-site/releases/latest/download/CTMBrowser_mac_intel.zip" download>versione Intel</a>
-              </p>
-            </div>
-          </div>
-
-          <a class="btn-secondary" href="acquista.html">
-            Acquista licenza
-          </a>
         </div>
       </div>
 
