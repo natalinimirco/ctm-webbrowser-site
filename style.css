@@ -682,7 +682,10 @@ body {
   border: 1.5px solid var(--border);
   border-radius: var(--radius, 16px);
   padding: 20px 24px;
-  width: 240px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   box-shadow: 0 6px 18px rgba(30, 58, 95, 0.08);
 }
@@ -692,28 +695,32 @@ body {
   box-shadow: 0 10px 26px rgba(30, 58, 95, 0.18);
 }
 
-.price-card h3 { margin: 4px 0 10px; color: var(--navy-700); }
+.price-card h3 { margin: 4px 0 10px; color: var(--navy-700); min-height: 1.3em; }
 
 .price-old {
   color: var(--muted);
   text-decoration: line-through;
   font-size: 0.95rem;
   margin: 0;
+  min-height: 1.3em;
 }
 
 .price-new {
   color: #c0392b;
   font-size: 1.7rem;
   font-weight: 800;
-  margin: 2px 0 10px;
+  margin: 2px 0 4px;
+  white-space: nowrap;
+  min-height: 1.3em;
 }
 
-.price-new span, .price-old span { font-size: 0.6em; font-weight: 600; color: var(--muted); }
+.price-new span, .price-old span { font-size: 0.55em; font-weight: 600; color: var(--muted); white-space: normal; }
 
 .price-fee-note {
   font-size: 0.72rem;
   color: var(--muted);
-  margin: -4px 0 10px;
+  margin: 0 0 10px;
+  min-height: 2.1em;
 }
 
 .price-card-desc {
@@ -723,7 +730,7 @@ body {
   margin-bottom: 14px;
 }
 
-.price-card .btn-primary { width: 100%; }
+.price-card .btn-primary { width: 100%; margin-top: auto; }
 
 .download-wrapper-full { max-width: 340px; margin: 0 auto; align-items: center; }
 
