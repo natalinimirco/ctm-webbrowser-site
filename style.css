@@ -240,6 +240,7 @@ body {
 .offer-image {
   display: block;
   max-width: 150px;
+  margin: 0 auto 10px;
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(139, 0, 0, 0.25);
 }
@@ -646,10 +647,6 @@ body {
 .pay-tab.on .pay-blue,
 .pay-tab.on .pay-lightblue { color: #fff; }
 
-.pay-btn-paypal {
-  background: linear-gradient(135deg, #003087, #009cde) !important;
-}
-
 /* Stessa tecnica a griglia già usata per Windows/Mac: entrambi i pannelli
    occupano la stessa cella, la riga si dimensiona sempre sul contenuto più
    alto, così cambiare scheda non fa "saltare" il resto della pagina. */
@@ -668,4 +665,62 @@ body {
 @media (max-width: 600px) {
   .pay-tabs { gap: 8px; }
   .pay-tab { padding: 9px 14px; font-size: 0.88rem; }
+}
+
+/* CARD PREZZO (Annuale / Life-time) */
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 18px 0 24px;
+}
+
+.price-card {
+  position: relative;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius, 16px);
+  padding: 20px 24px;
+  width: 240px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(30, 58, 95, 0.08);
+}
+
+.price-card.featured {
+  border-color: var(--navy-600);
+  box-shadow: 0 10px 26px rgba(30, 58, 95, 0.18);
+}
+
+.price-card h3 { margin: 4px 0 10px; color: var(--navy-700); }
+
+.price-old {
+  color: var(--muted);
+  text-decoration: line-through;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.price-new {
+  color: #c0392b;
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin: 2px 0 10px;
+}
+
+.price-new span, .price-old span { font-size: 0.6em; font-weight: 600; color: var(--muted); }
+
+.price-card-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 40px;
+  margin-bottom: 14px;
+}
+
+.price-card .btn-primary { width: 100%; }
+
+.download-wrapper-full { max-width: 340px; margin: 0 auto; align-items: center; }
+
+@media (max-width: 600px) {
+  .price-card { width: 100%; max-width: 280px; }
 }

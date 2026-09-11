@@ -71,20 +71,41 @@
       </div>
     </div>
 
-    <!-- BLOCCO PREZZO + DOWNLOAD -->
+    <!-- BLOCCO PREZZI -->
     <div class="hero-download">
       <p class="pricing">
-        Prezzo di listino: <strong>49,90 €</strong> per una postazione con licenza <strong>life-time</strong>;
-        prezzo di lancio <strong>29,90 €</strong>.
-        Sono compresi gli aggiornamenti correttivi (bugfix) e l’assistenza via mail.
+        Due modalità di licenza, entrambe con aggiornamenti correttivi (bugfix)
+        e assistenza via mail comprese. Offerta di lancio in corso su entrambe.
       </p>
 
-      <div class="hero-cta">
-        <div class="offer-wrapper">
+      <div class="pricing-cards">
+        <div class="price-card">
+          <!-- ⚠ TODO: sostituire src="sconto.jpg" con src="sconto1.jpg"
+               quando l'immagine dedicata all'offerta Annuale sarà pronta. -->
           <img class="offer-image" src="sconto.jpg"
-               alt="Offerta di lancio CTM WebBrowser 29,90 € anziché 49,90 € per i primi 15 giorni" />
+               alt="Offerta di lancio CTM WebBrowser: licenza Annuale a 24,90 € anziché 39,90 €" />
+          <h3>Annuale</h3>
+          <p class="price-old">39,90 €<span>/anno</span></p>
+          <p class="price-new">24,90 €<span>/anno</span></p>
+          <p class="price-card-desc">Rinnovo ogni 12 mesi. Ideale per iniziare con il minimo impegno.</p>
+          <a class="btn-primary" href="acquista.html?piano=annuale">Scegli Annuale</a>
         </div>
-        <div class="download-wrapper">
+
+        <div class="price-card featured">
+          <!-- ⚠ TODO: sostituire src="sconto.jpg" con src="sconto2.jpg"
+               quando l'immagine dedicata all'offerta Life-time sarà pronta. -->
+          <img class="offer-image" src="sconto.jpg"
+               alt="Offerta di lancio CTM WebBrowser: licenza Life-time a 39,90 € anziché 69,90 €" />
+          <h3>Life-time</h3>
+          <p class="price-old">69,90 €</p>
+          <p class="price-new">39,90 €<span>una tantum</span></p>
+          <p class="price-card-desc">Si paga una sola volta: nessun rinnovo da ricordare.</p>
+          <a class="btn-primary" href="acquista.html?piano=lifetime">Scegli Life-time</a>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <div class="download-wrapper download-wrapper-full">
 
           <div class="os-tabs">
             <button type="button" class="os-tab on" data-os="win" onclick="ctmSelectOs('win',this)">🪟 Windows</button>

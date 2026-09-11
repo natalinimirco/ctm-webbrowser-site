@@ -31,29 +31,65 @@
 
   <main>
 
-    <!-- INTRO -->
+    <!-- INTRO + SCELTA PIANO -->
     <section class="section">
       <h2>Acquisto licenza CTM WebBrowser</h2>
-      <p>
-        La licenza di CTM WebBrowser è valida per <strong>una postazione</strong> con
-        <strong>licenza life-time</strong>. Nel prezzo sono compresi:
-      </p>
-      <ul class="info-list">
-        <li>utilizzo illimitato della versione acquistata;</li>
-        <li>aggiornamenti correttivi (bugfix) rilasciati per la stessa versione;</li>
-        <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
-      </ul>
-      <p>
-        Prezzo di listino: <strong>49,90 €</strong> per postazione;<br>
-        Prezzo di lancio: <strong>29,90 €</strong> per postazione
-        (oltre contributo cassa 4% e bollo € 2,00).
-      </p>
+      <p>Scegli il piano di licenza:</p>
+
+      <div class="pay-tabs">
+        <button type="button" class="pay-tab" data-piano="annuale" onclick="ctmSelectPiano('annuale',this)">
+          Annuale
+        </button>
+        <button type="button" class="pay-tab on" data-piano="lifetime" onclick="ctmSelectPiano('lifetime',this)">
+          Life-time
+        </button>
+      </div>
+
+      <div id="piano-panels" class="pay-panels">
+        <div id="piano-panel-annuale" class="pay-panel">
+          <p>
+            La licenza <strong>Annuale</strong> è valida per <strong>una postazione</strong>,
+            con rinnovo ogni 12 mesi. Nel prezzo sono compresi:
+          </p>
+          <ul class="info-list">
+            <li>utilizzo illimitato della versione acquistata per 12 mesi;</li>
+            <li>aggiornamenti correttivi (bugfix) rilasciati durante il periodo di validità;</li>
+            <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+          </ul>
+          <p>
+            Prezzo di listino: <strong>39,90 €</strong>/anno per postazione;<br>
+            Prezzo di lancio: <strong>24,90 €</strong>/anno per postazione
+            (oltre contributo cassa 4% e bollo € 2,00).
+          </p>
+        </div>
+
+        <div id="piano-panel-lifetime" class="pay-panel on">
+          <p>
+            La licenza <strong>Life-time</strong> è valida per <strong>una postazione</strong>,
+            <strong>senza scadenza</strong>. Nel prezzo sono compresi:
+          </p>
+          <ul class="info-list">
+            <li>utilizzo illimitato della versione acquistata, per sempre;</li>
+            <li>aggiornamenti correttivi (bugfix) rilasciati per la stessa versione;</li>
+            <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+          </ul>
+          <p>
+            Prezzo di listino: <strong>69,90 €</strong> per postazione;<br>
+            Prezzo di lancio: <strong>39,90 €</strong> per postazione
+            (oltre contributo cassa 4% e bollo € 2,00).
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- PAGAMENTO -->
     <section class="section" id="pagamento">
       <h2>Modalità di pagamento</h2>
-      <p>Scegli come preferisci pagare: le istruzioni cambiano in base alla scelta.</p>
+      <p>
+        Scegli come preferisci pagare: le istruzioni cambiano in base alla scelta.
+        Importo da versare per il piano <strong><span id="piano-corrente-nome">Life-time</span></strong>:
+        <strong><span class="js-price">39,90</span> €</strong>.
+      </p>
 
       <div class="pay-tabs">
         <button type="button" class="pay-tab on" data-pay="bonifico" onclick="ctmSelectPay('bonifico',this)">
@@ -89,7 +125,7 @@
                PLACEHOLDER FITTIZI, mai sostituiti con i dati reali. ⚠⚠⚠ -->
             <li>intestatario: nome e cognome professionista/società (da definire);</li>
             <li>IBAN: <strong>IT60X0000000000000000000000</strong> (esempio, da sostituire con quello reale);</li>
-            <li>importo: <strong>29,90 € (prezzo di lancio)</strong> per licenza singola (oltre contributo cassa 4% e bollo € 2,00);</li>
+            <li>importo: <strong><span class="js-price">39,90</span> € (prezzo di lancio)</strong> per il piano selezionato (oltre contributo cassa 4% e bollo € 2,00);</li>
             <li>causale: <strong>“Licenza CTM – [nome cognome / studio]”</strong>.</li>
           </ul>
           <p class="note">
@@ -111,7 +147,7 @@
                pagamento). Il pulsante è un PLACEHOLDER, non funzionante. ⚠⚠⚠ -->
           <p>
             <a class="btn-primary" href="#" rel="noopener noreferrer">
-              💳 Paga con carta (29,90 €)
+              💳 Paga con carta (<span class="js-price">39,90</span> €)
             </a>
           </p>
           <p class="note">
@@ -130,8 +166,8 @@
                link PayPal.me (es. https://paypal.me/tuonome/29.90), che apre
                direttamente la schermata di pagamento con importo precompilato. -->
           <p>
-            <a class="btn-primary pay-btn-paypal" href="#" rel="noopener noreferrer">
-              Paga con PayPal (29,90 €)
+            <a class="btn-primary" href="#" rel="noopener noreferrer">
+              Paga con PayPal (<span class="js-price">39,90</span> €)
             </a>
           </p>
           <p class="note">
@@ -271,13 +307,49 @@
 <script>
   // Selezione metodo di pagamento (Bonifico / Carta / PayPal), stesso
   // meccanismo già usato per Windows/Mac nella home.
+  // NB: selettori delimitati a "[data-pay]"/"#pay-panels": la scheda del
+  // PIANO più sopra usa la stessa classe .pay-tab/.pay-panel per lo stesso
+  // stile visivo, ma sono due gruppi di schede indipendenti — senza questa
+  // delimitazione, selezionare un metodo di pagamento azzererebbe anche la
+  // selezione del piano appena fatta, e viceversa.
   function ctmSelectPay(metodo, btn) {
-    document.querySelectorAll('.pay-tab').forEach(function (b) { b.classList.remove('on'); });
-    document.querySelectorAll('.pay-panel').forEach(function (p) { p.classList.remove('on'); });
+    document.querySelectorAll('.pay-tab[data-pay]').forEach(function (b) { b.classList.remove('on'); });
+    document.querySelectorAll('#pay-panels .pay-panel').forEach(function (p) { p.classList.remove('on'); });
     if (btn) btn.classList.add('on');
     var panel = document.getElementById('pay-panel-' + metodo);
     if (panel) panel.classList.add('on');
   }
+
+  // Selezione piano di licenza (Annuale / Life-time): aggiorna il pannello
+  // di descrizione E tutti i prezzi mostrati più sotto (bonifico, carta,
+  // PayPal), che condividono la classe "js-price".
+  var CTM_PREZZI = { annuale: '24,90', lifetime: '39,90' };
+  var CTM_NOMI_PIANO = { annuale: 'Annuale', lifetime: 'Life-time' };
+
+  function ctmSelectPiano(piano, btn) {
+    document.querySelectorAll('.pay-tab[data-piano]').forEach(function (b) { b.classList.remove('on'); });
+    document.querySelectorAll('#piano-panels .pay-panel').forEach(function (p) { p.classList.remove('on'); });
+    if (btn) btn.classList.add('on');
+    var panel = document.getElementById('piano-panel-' + piano);
+    if (panel) panel.classList.add('on');
+
+    var prezzo = CTM_PREZZI[piano] || CTM_PREZZI.lifetime;
+    document.querySelectorAll('.js-price').forEach(function (el) { el.textContent = prezzo; });
+    var nomeEl = document.getElementById('piano-corrente-nome');
+    if (nomeEl) nomeEl.textContent = CTM_NOMI_PIANO[piano] || CTM_NOMI_PIANO.lifetime;
+  }
+
+  // Piano preselezionato in base al link cliccato in home (es.
+  // acquista.html?piano=annuale) — se assente o non riconosciuto, resta il
+  // default Life-time già impostato nell'HTML.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var piano = params.get('piano');
+    if (piano === 'annuale' || piano === 'lifetime') {
+      var btn = document.querySelector('.pay-tab[data-piano="' + piano + '"]');
+      ctmSelectPiano(piano, btn);
+    }
+  })();
 
   document.addEventListener('DOMContentLoaded', function () {
     // anno footer
