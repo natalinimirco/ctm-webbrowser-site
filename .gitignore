@@ -1,0 +1,31 @@
+# credentials.json: NON escluso — repo privato, il file va incluso di proposito
+# (client OAuth "Desktop app": Google lo considera un identificativo, non un vero segreto,
+# e viene distribuito con l'app come da documentazione ufficiale Google)
+# Ambienti Python
+venv/
+.venv/
+__pycache__/
+
+# Build
+build/
+build_obf/
+dist/
+
+# File locali
+desktop.ini
+albero.txt
+*.log
+
+# Script locali di sviluppo/build (restano sul tuo PC, non su GitHub):
+# non servono a nessuna build automatica (GitHub Actions builda solo il Mac
+# tramite build_mac.yml) né vengono mai inclusi nell'exe/app compilato
+# (i due file .spec non li referenziano in "datas").
+*.bat
+
+# Manuale utente: il sorgente Word (.docx) NON serve alla build (né
+# PyInstaller né i workflow lo referenziano) ed è un file pesante da tenere
+# fuori dal repository — è solo il documento di lavoro per scrivere il
+# manuale. Il PDF "Manuale CTM_Browser 1.0.pdf" invece RESTA tracciato:
+# viene davvero incluso nell'app compilata (vedi datas negli spec) e serve
+# al pulsante "Manuale" dentro il programma.
+*.docx

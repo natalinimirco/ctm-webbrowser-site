@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Statistiche · CTM WebBrowser</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+  <style>
+    .stat-grid { display:flex; flex-wrap:wrap; gap:14px; margin:16px 0 8px; }
+    .stat-card { flex:1 1 170px; background:#fff; border:1.5px solid var(--border); border-radius:14px;
+                 padding:16px 14px; text-align:center; box-shadow:0 4px 14px rgba(30,58,95,.07); }
+    .stat-num  { font-size:2rem; font-weight:800; color:var(--navy-700); line-height:1.1; }
+    .stat-lbl  { font-size:.85rem; color:var(--muted); margin-top:6px; }
+    .stat-card.tot { border-color:var(--navy-600); }
+    .stat-table { width:100%; border-collapse:collapse; font-size:.9rem; margin-top:10px; }
+    .stat-table th, .stat-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:right; }
+    .stat-table th:first-child, .stat-table td:first-child { text-align:left; }
+    .stat-table th { color:var(--navy-700); font-weight:700; }
+    .stat-scroll { overflow-x:auto; }
+    #stat-esito { font-size:.9rem; margin:8px 0 0; color:var(--muted); }
+    #stat-esito.err { color:#c0392b; font-weight:600; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <div class="logo-pill">
+      <span class="logo-mark">CTM</span>
+      <span class="logo-text">WebBrowser</span>
+    </div>
+    <nav class="topnav">
+      <a href="index.html#top">Torna al sito</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section">
+      <h2>Statistiche del sito</h2>
+      <p class="note">Pagina riservata: non è collegata dal menu né indicizzata dai motori di ricerca.</p>
+
+      <h3>Download dei programmi</h3>
+      <p>Conteggio ufficiale di GitHub per ogni file scaricato dalle Release, sommando tutte le versioni pubblicate.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-num" id="n-win">…</div><div class="stat-lbl">Windows (.exe)</div></div>
+        <div class="stat-card"><div class="stat-num" id="n-mac-si">…</div><div class="stat-lbl">Mac Apple Silicon</div></div>
+        <div class="stat-card"><div class="stat-num" id="n-mac-in">…</div><div class="stat-lbl">Mac Intel</div></div>
+        <div class="stat-card tot"><div class="stat-num" id="n-mac">…</div><div class="stat-lbl">Mac in totale</div></div>
+      </div>
+
+      <p id="stat-esito">Caricamento in corso…</p>
+      <p><button type="button" class="btn-secondary" id="btn-aggiorna">Aggiorna</button></p>
+
+      <h3>Dettaglio per versione</h3>
+      <div class="stat-scroll">
+        <table class="stat-table" id="tab-versioni">
+          <thead><tr><th>Versione</th><th>Pubblicata il</th><th>Windows</th><th>Mac Silicon</th><th>Mac Intel</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <p class="note">
+        Nei numeri sono compresi anche i tuoi download di prova e gli eventuali scaricamenti automatici
+        (ad esempio di motori di ricerca o antivirus): indicano l'ordine di grandezza, non il numero esatto di utenti.
+        GitHub limita le consultazioni di questo contatore a circa 60 l'ora per indirizzo: se compare un
+        avviso di limite raggiunto, riprova più tardi.
+      </p>
+
+      <h3>Visite al sito</h3>
+      <p>
+        Le visite non compaiono qui: si leggono su <strong>ctmbrowser.goatcounter.com</strong> (il nome scelto in <code>analytics.js</code>).</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+    <p><a href="privacy.html">Informativa privacy</a></p>
+  </footer>
+
+</div>
+
+<script>
+  // Repository che ospita le Release (stesso indicato nei link di download del sito)
+  var REPO = 'natalinimirco/ctm-webbrowser-site';
+
+  // Riconosce il tipo di file dal nome
+  function tipoFile(nome) {
+    var n = (nome || '').toLowerCase();
+    if (/\.exe$/.test(n)) return 'win';
+    if (/mac/.test(n) && /(apple|silicon|arm)/.test(n) && /\.zip$/.test(n)) return 'macSi';
+    if (/mac/.test(n) && /intel/.test(n) && /\.zip$/.test(n)) return 'macIn';
+    return 'altro';
+  }
+  function fmt(n) { return Number(n).toLocaleString('it-IT'); }
+  function set(id, v) { document.getElementById(id).textContent = v; }
+
+  function disegna(releases) {
+    var tot = { win: 0, macSi: 0, macIn: 0 };
+    var tbody = document.querySelector('#tab-versioni tbody');
+    tbody.innerHTML = '';
+    releases.forEach(function (r) {
+      var riga = { win: 0, macSi: 0, macIn: 0 };
+      (r.assets || []).forEach(function (a) {
+        var t = tipoFile(a.name);
+        if (t in riga) riga[t] += (a.download_count || 0);
+      });
+      tot.win += riga.win; tot.macSi += riga.macSi; tot.macIn += riga.macIn;
+      var tr = document.createElement('tr');
+      var data = r.published_at ? new Date(r.published_at).toLocaleDateString('it-IT') : '—';
+      [r.name || r.tag_name, data, fmt(riga.win), fmt(riga.macSi), fmt(riga.macIn)].forEach(function (v) {
+        var td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    if (!releases.length) {
+      var tr = document.createElement('tr'), td = document.createElement('td');
+      td.colSpan = 5; td.textContent = 'Nessuna Release pubblicata.'; tr.appendChild(td); tbody.appendChild(tr);
+    }
+    set('n-win', fmt(tot.win));
+    set('n-mac-si', fmt(tot.macSi));
+    set('n-mac-in', fmt(tot.macIn));
+    set('n-mac', fmt(tot.macSi + tot.macIn));
+  }
+
+  function carica() {
+    var esito = document.getElementById('stat-esito');
+    esito.className = ''; esito.textContent = 'Caricamento in corso…';
+    fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=100',
+          { headers: { 'Accept': 'application/vnd.github+json' } })
+      .then(function (r) {
+        if (!r.ok) {
+          throw new Error(r.status === 403
+            ? 'Limite di consultazioni GitHub raggiunto: riprova tra qualche minuto.'
+            : 'GitHub ha risposto con errore ' + r.status + '.');
+        }
+        return r.json();
+      })
+      .then(function (releases) {
+        disegna(releases);
+        esito.textContent = 'Aggiornato alle ' + new Date().toLocaleTimeString('it-IT') + '.';
+      })
+      .catch(function (e) {
+        esito.className = 'err';
+        esito.textContent = (e && e.message && e.message.indexOf('Failed') === -1)
+          ? e.message : 'Impossibile contattare GitHub: controlla la connessione e riprova.';
+      });
+  }
+
+  document.getElementById('btn-aggiorna').addEventListener('click', carica);
+  document.getElementById('year').textContent = new Date().getFullYear();
+  carica();
+</script>
+<script src="analytics.js" defer></script>
+
+</body>
+</html>

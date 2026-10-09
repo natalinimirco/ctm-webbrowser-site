@@ -1,0 +1,52 @@
+Pronto. Scegli un'operazione dai pulsanti sopra.
+Ogni operazione viene salvata anche in: C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito\log_manutenzione.txt
+
+Pronto. Scegli un'operazione dai pulsanti sopra.
+Ogni operazione viene salvata anche in: C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito\log_manutenzione.txt
+
+
+======================================================================
+ PUBBLICAZIONE SU GITHUB — 10/09/2026 16:17:36
+======================================================================
+Cartella:   C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito
+Repository: https://github.com/natalinimirco/CTM-BROWSER.git
+Branch:     main
+
+$ git --version
+git version 2.55.0.windows.3
+[OK] Terminato correttamente.
+
+[1/7] Eliminazione repository Git locale...
+  impossibile eliminare .git: [WinError 5] Accesso negato: 'C:\\Users\\PC\\Desktop\\CTM\\WEBAPP\\CTM_NOV_2025_02\\03_Sito\\.git\\objects\\0e\\53b3a8773c1927223ff9658d66db938a6c166e'
+
+======================================================================
+ PUBBLICAZIONE SU GITHUB — 10/09/2026 16:17:56
+======================================================================
+Cartella:   C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito
+Repository: https://github.com/natalinimirco/CTM-BROWSER.git
+Branch:     main
+
+$ git --version
+git version 2.55.0.windows.3
+[OK] Terminato correttamente.
+
+[1/7] Eliminazione repository Git locale...
+  impossibile eliminare .git: [WinError 5] Accesso negato: 'C:\\Users\\PC\\Desktop\\CTM\\WEBAPP\\CTM_NOV_2025_02\\03_Sito\\.git\\objects\\0e\\53b3a8773c1927223ff9658d66db938a6c166e'
+
+======================================================================
+ PUBBLICAZIONE SU GITHUB — 10/09/2026 16:18:07
+======================================================================
+Cartella:   C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito
+Repository: https://github.com/natalinimirco/CTM-BROWSER.git
+Branch:     main
+
+$ git --version
+git version 2.55.0.windows.3
+[OK] Terminato correttamente.
+
+[1/7] Eliminazione repository Git locale...
+  impossibile eliminare .git: [WinError 5] Accesso negato: 'C:\\Users\\PC\\Desktop\\CTM\\WEBAPP\\CTM_NOV_2025_02\\03_Sito\\.git\\objects\\0e\\53b3a8773c1927223ff9658d66db938a6c166e'
+Pronto. Scegli un'operazione dai pulsanti sopra.
+Ogni operazione viene salvata anche in: C:\Users\PC\Desktop\CTM\WEBAPP\CTM_NOV_2025_02\03_Sito\log_manutenzione.txt
+
+Operazione annullata.

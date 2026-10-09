@@ -1,0 +1,445 @@
+<!DOCTYPE html> 
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acquista licenza · Concrete Test Manager (CTM) WebBrowser</title>
+  <meta name="description"
+        content="Acquisto licenza CTM WebBrowser: modalità di pagamento e dati per la fatturazione.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="app_icon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo-pill">
+      <span class="logo-mark">CTM</span>
+      <span class="logo-text">WebBrowser</span>
+    </div>
+    <nav class="topnav">
+      <a href="index.html#top">Torna al sito</a>
+      <a href="#pagamento">Pagamento</a>
+      <a href="#fatturazione">Dati fatturazione</a>
+      <a href="#recensioni">Recensioni</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- INTRO + SCELTA PIANO -->
+    <section class="section">
+      <h2>Acquisto licenza CTM WebBrowser</h2>
+      <p>Scegli il piano di licenza:</p>
+
+      <div class="pay-tabs">
+        <button type="button" class="pay-tab" data-piano="annuale" onclick="ctmSelectPiano('annuale',this)">
+          Annuale
+        </button>
+        <button type="button" class="pay-tab on" data-piano="lifetime" onclick="ctmSelectPiano('lifetime',this)">
+          Life-time
+        </button>
+      </div>
+
+      <div id="piano-panels" class="pay-panels">
+        <div id="piano-panel-annuale" class="pay-panel">
+          <p>
+            La licenza <strong>Annuale</strong> è valida per <strong>una postazione</strong>,
+            con rinnovo ogni 12 mesi. Nel prezzo sono compresi:
+          </p>
+          <ul class="info-list">
+            <li>utilizzo illimitato della versione acquistata per 12 mesi;</li>
+            <li>aggiornamenti correttivi (bugfix) rilasciati durante il periodo di validità;</li>
+            <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+          </ul>
+          <p>
+            Prezzo di listino: <strong>39,90 €</strong>/anno per postazione
+            (oltre contributo cassa 4% e bollo € 2,00);<br>
+            Prezzo di lancio: <strong>24,90 €</strong>/anno per postazione
+            (oltre contributo cassa 4% e bollo € 2,00).
+          </p>
+        </div>
+
+        <div id="piano-panel-lifetime" class="pay-panel on">
+          <p>
+            La licenza <strong>Life-time</strong> è valida per <strong>una postazione</strong>,
+            <strong>senza scadenza</strong>. Nel prezzo sono compresi:
+          </p>
+          <ul class="info-list">
+            <li>utilizzo illimitato della versione acquistata, per sempre;</li>
+            <li>aggiornamenti correttivi (bugfix);</li>
+            <li>assistenza via mail all’indirizzo <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.</li>
+          </ul>
+          <p>
+            Prezzo di listino: <strong>69,90 €</strong> per postazione
+            (oltre contributo cassa 4% e bollo € 2,00);<br>
+            Prezzo di lancio: <strong>39,90 €</strong> per postazione
+            (oltre contributo cassa 4% e bollo € 2,00).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <section class="section" id="pagamento">
+      <h2>Modalità di pagamento</h2>
+      <p>
+        Scegli come preferisci pagare: le istruzioni cambiano in base alla scelta.
+        Importo da versare per il piano <strong><span id="piano-corrente-nome">Life-time</span></strong>:
+        <strong><span class="js-price">39,90</span> €</strong>.
+      </p>
+
+      <div class="pay-tabs">
+        <button type="button" class="pay-tab on" data-pay="bonifico" onclick="ctmSelectPay('bonifico',this)">
+          <svg class="pay-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2 2 7v2h20V7L12 2Z" fill="currentColor"/>
+            <path d="M4 10v8H2v2h20v-2h-2v-8h-2v8h-3v-8h-2v8h-2v-8H9v8H6v-8H4Z" fill="currentColor"/>
+          </svg>
+          Bonifico
+          <span class="pay-badge">Consigliato</span>
+        </button>
+        <button type="button" class="pay-tab" data-pay="carta" onclick="ctmSelectPay('carta',this)">
+          <svg class="pay-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="2.5" fill="currentColor" opacity="0.15"/>
+            <rect x="2" y="5" width="20" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="2" y="9" width="20" height="3" fill="currentColor"/>
+            <rect x="4.5" y="14.5" width="6" height="2" rx="1" fill="currentColor"/>
+          </svg>
+          Carta di credito
+        </button>
+        <button type="button" class="pay-tab" data-pay="paypal" onclick="ctmSelectPay('paypal',this)">
+          <span class="pay-word-paypal"><span class="pay-blue">Pay</span><span class="pay-lightblue">Pal</span></span>
+        </button>
+      </div>
+
+      <div id="pay-panels" class="pay-panels">
+
+        <!-- BONIFICO -->
+        <div id="pay-panel-bonifico" class="pay-panel on">
+          <h3>Bonifico bancario</h3>
+          <p>Puoi effettuare il pagamento tramite bonifico utilizzando i dati seguenti:</p>
+          <ul class="info-list">
+            <li>intestatario: <strong>Mirco Natalini</strong>;</li>
+            <li>IBAN: <strong>IT52E03268223000EMH00127242</strong>;</li>
+            <li>importo: <strong><span class="js-price">39,90</span> € (prezzo di lancio)</strong> per il piano selezionato (oltre contributo cassa 4% e bollo € 2,00);</li>
+            <li>causale: <strong>“Licenza CTM – [nome cognome / studio]”</strong>.</li>
+          </ul>
+          <p class="note">
+            Dopo il pagamento invia una mail con la ricevuta e i dati di fatturazione a
+            <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+          </p>
+        </div>
+
+        <!-- CARTA DI CREDITO -->
+        <div id="pay-panel-carta" class="pay-panel">
+          <h3>Carta di credito</h3>
+          <p>
+            Puoi pagare direttamente con carta di credito o debito, senza bisogno di un account
+            PayPal, tramite il link di pagamento sicuro qui sotto:
+          </p>
+          <p class="note">
+            Il pagamento è gestito da Stripe, un circuito di pagamento sicuro e certificato,
+            usato da milioni di attività in tutto il mondo. I dati della carta non passano mai
+            dal nostro sito. Dopo il pagamento invia comunque una mail di conferma a
+            <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a> con i dati di fatturazione.
+          </p>
+          <!-- ⚠⚠⚠ TODO PRIMA DI PUBBLICARE: sostituire con il vero Payment Link
+               Stripe una volta creato dalla dashboard Stripe (Pagamenti → Link di
+               pagamento). Il pulsante è un PLACEHOLDER, non funzionante. ⚠⚠⚠ -->
+          <p>
+            <a class="btn-primary js-link-carta" href="#" rel="noopener noreferrer">
+              💳 Paga con carta (<span class="js-price">39,90</span> €)
+            </a>
+          </p>
+        </div>
+
+        <!-- PAYPAL -->
+        <div id="pay-panel-paypal" class="pay-panel">
+          <h3>PayPal</h3>
+          <p>Puoi pagare tramite PayPal cliccando qui sotto:</p>
+          <p class="note">
+            Invia <strong>“Beni e servizi”</strong> (non “Amici e parenti”), così il pagamento
+            risulta correttamente tracciato. Nella nota indica sempre “CTM WebBrowser – licenza
+            singola” e i dati dello studio. Dopo il pagamento invia comunque una mail di conferma a
+            <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a> con i dati di fatturazione.
+          </p>
+          <!-- ⚠ TODO PRIMA DI PUBBLICARE: sostituire href="#" con un vero
+               link PayPal.me (es. https://paypal.me/tuonome/29.90), che apre
+               direttamente la schermata di pagamento con importo precompilato. -->
+          <p>
+            <a class="btn-primary js-link-paypal" href="#" rel="noopener noreferrer">
+              Paga con PayPal (<span class="js-price">39,90</span> €)
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DATI FATTURAZIONE -->
+    <section class="section" id="fatturazione">
+      <h2>Dati per la fatturazione</h2>
+      <p>
+        Compila i dati seguenti. Al termine, puoi usare il pulsante
+        <strong>“Copia dati per email”</strong> per copiare automaticamente tutti i campi:
+        ti basterà incollare (Ctrl+V) il testo nel corpo della mail da inviare a
+        <a href="mailto:ctmbrowser@gmail.com">ctmbrowser@gmail.com</a>.
+      </p>
+
+      <form class="billing-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" placeholder="Mario" />
+          </div>
+          <div class="form-field">
+            <label for="cognome">Cognome</label>
+            <input id="cognome" type="text" placeholder="Rossi" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="ragione">Ragione sociale (se presente)</label>
+          <input id="ragione" type="text" placeholder="Studio Tecnico Rossi" />
+        </div>
+
+        <div class="form-field">
+          <label for="indirizzo">Indirizzo di fatturazione</label>
+          <input id="indirizzo" type="text" placeholder="Via Esempio 1, CAP, Città (Provincia)" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="piva">Partita IVA</label>
+            <input id="piva" type="text" placeholder="IT12345678901" />
+          </div>
+          <div class="form-field">
+            <label for="cfisc">Codice fiscale</label>
+            <input id="cfisc" type="text" placeholder="RSSMRA80A01H501Z" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email per invio fattura</label>
+            <input id="email" type="email" placeholder="nome@studio.it" />
+          </div>
+          <div class="form-field">
+            <label for="telefono">Telefono (opzionale)</label>
+            <input id="telefono" type="tel" placeholder="+39 ..." />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="note">Note aggiuntive</label>
+          <textarea id="note" rows="3" placeholder="SDI per fatturazione, eventuali riferimenti ordine o altre note utili"></textarea>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-copy-billing">
+          Copia dati per email
+        </button>
+
+        <p class="note">
+          Questo form non invia automaticamente alcun dato: serve solo come promemoria.
+          Dopo aver compilato i campi, clicca su “Copia dati per email”, poi incolla il testo
+          nel corpo del messaggio che invierai a <strong>ctmbrowser@gmail.com</strong>,
+          allegando la ricevuta di pagamento.
+        </p>
+      </form>
+    </section>
+
+    <!-- RECENSIONI -->
+    <section class="section" id="recensioni">
+      <h2>Recensioni degli utilizzatori ⭐</h2>
+      <p>
+        Puoi lasciare una breve recensione sulla tua esperienza d’uso con CTM WebBrowser.
+        Compila i campi seguenti e clicca su
+        <strong>“Pubblica la tua recensione ⭐”</strong>.
+      </p>
+
+      <!-- FORM RECENSIONI collegato a FormSubmit -->
+      <form class="review-form"
+            id="review-form"
+            action="https://formsubmit.co/ctmbrowser@gmail.com"
+            method="POST">
+
+        <!-- Opzioni FormSubmit -->
+        <input type="hidden" name="_subject" value="Nuova recensione CTM WebBrowser">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- dopo invio torna alla stessa pagina, sezione recensioni -->
+        <input type="hidden" name="_next" value="https://natalinimirco.github.io/ctm-webbrowser-site/acquista.html#recensioni">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="rec-utente">Utente</label>
+            <input id="rec-utente" name="utente" type="text" placeholder="Studio Rossi / Mario R." required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rec-testo">Recensione</label>
+          <textarea id="rec-testo" name="recensione" rows="3" placeholder="Scrivi qui la tua esperienza con CTM WebBrowser..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">
+          Pubblica la tua recensione ⭐
+        </button>
+        <p class="note">
+          La recensione verrà inviata all’autore del software via email. Una selezione delle recensioni,
+          dopo verifica, potrà essere pubblicata nella sezione “Recensioni degli utilizzatori ⭐” in fondo alla homepage.
+        </p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Concrete Test Manager (CTM) WebBrowser – Tutti i diritti riservati.</p>
+    <p><a href="privacy.html">Informativa privacy</a></p>
+  </footer>
+
+</div>
+
+<script>
+  // Selezione metodo di pagamento (Bonifico / Carta / PayPal), stesso
+  // meccanismo già usato per Windows/Mac nella home.
+  // NB: selettori delimitati a "[data-pay]"/"#pay-panels": la scheda del
+  // PIANO più sopra usa la stessa classe .pay-tab/.pay-panel per lo stesso
+  // stile visivo, ma sono due gruppi di schede indipendenti — senza questa
+  // delimitazione, selezionare un metodo di pagamento azzererebbe anche la
+  // selezione del piano appena fatta, e viceversa.
+  function ctmSelectPay(metodo, btn) {
+    document.querySelectorAll('.pay-tab[data-pay]').forEach(function (b) { b.classList.remove('on'); });
+    document.querySelectorAll('#pay-panels .pay-panel').forEach(function (p) { p.classList.remove('on'); });
+    if (btn) btn.classList.add('on');
+    var panel = document.getElementById('pay-panel-' + metodo);
+    if (panel) panel.classList.add('on');
+  }
+
+  // Selezione piano di licenza (Annuale / Life-time): aggiorna il pannello
+  // di descrizione E tutti i prezzi mostrati più sotto (bonifico, carta,
+  // PayPal), che condividono la classe "js-price".
+  var CTM_PREZZI = { annuale: '24,90', lifetime: '39,90' };
+  // ⚠ LINK DI PAGAMENTO: incolla qui i tuoi URL reali (uno per piano).
+  //   carta  = Payment Link Stripe  (https://buy.stripe.com/...)
+  //   paypal = link di pagamento PayPal (https://www.paypal.com/ncp/payment/...)
+  // Finché restano vuoti, il pulsante avvisa di scrivere via mail.
+  var CTM_LINK = {
+    annuale:  { carta: 'https://buy.stripe.com/aFa7sLcVPbf23pA5Poew803', paypal: 'https://www.paypal.com/ncp/payment/LEHGMN3QSSA7Q' },
+    lifetime: { carta: 'https://buy.stripe.com/00waEXf3XgzmbW65Poew802', paypal: 'https://www.paypal.com/ncp/payment/3UG5KBF6L3GE4' }
+  };
+  var CTM_NOMI_PIANO = { annuale: 'Annuale', lifetime: 'Life-time' };
+
+  function ctmSelectPiano(piano, btn) {
+    document.querySelectorAll('.pay-tab[data-piano]').forEach(function (b) { b.classList.remove('on'); });
+    document.querySelectorAll('#piano-panels .pay-panel').forEach(function (p) { p.classList.remove('on'); });
+    if (btn) btn.classList.add('on');
+    var panel = document.getElementById('piano-panel-' + piano);
+    if (panel) panel.classList.add('on');
+
+    var prezzo = CTM_PREZZI[piano] || CTM_PREZZI.lifetime;
+    document.querySelectorAll('.js-price').forEach(function (el) { el.textContent = prezzo; });
+    var L = CTM_LINK[piano] || CTM_LINK.lifetime;
+    [['.js-link-carta', L.carta], ['.js-link-paypal', L.paypal]].forEach(function (x) {
+      document.querySelectorAll(x[0]).forEach(function (a) {
+        if (x[1]) { a.href = x[1]; a.target = '_blank'; a.onclick = null; }
+        else { a.href = '#'; a.removeAttribute('target');
+               a.onclick = function (e) { e.preventDefault(); alert('Pagamento online in attivazione: scrivi a ctmbrowser@gmail.com e ti inviamo il link.'); }; }
+      });
+    });
+    var nomeEl = document.getElementById('piano-corrente-nome');
+    if (nomeEl) nomeEl.textContent = CTM_NOMI_PIANO[piano] || CTM_NOMI_PIANO.lifetime;
+  }
+
+  ctmSelectPiano('lifetime', document.querySelector('.pay-tab[data-piano="lifetime"]'));
+
+  // Piano preselezionato in base al link cliccato in home (es.
+  // acquista.html?piano=annuale) — se assente o non riconosciuto, resta il
+  // default Life-time già impostato nell'HTML.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var piano = params.get('piano');
+    if (piano === 'annuale' || piano === 'lifetime') {
+      var btn = document.querySelector('.pay-tab[data-piano="' + piano + '"]');
+      ctmSelectPiano(piano, btn);
+    }
+  })();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // anno footer
+    var yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- COPIA DATI FATTURAZIONE PER EMAIL ---
+    var btnCopy = document.getElementById('btn-copy-billing');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function () {
+        var nome = document.getElementById('nome')?.value || '';
+        var cognome = document.getElementById('cognome')?.value || '';
+        var ragione = document.getElementById('ragione')?.value || '';
+        var indirizzo = document.getElementById('indirizzo')?.value || '';
+        var piva = document.getElementById('piva')?.value || '';
+        var cfisc = document.getElementById('cfisc')?.value || '';
+        var email = document.getElementById('email')?.value || '';
+        var telefono = document.getElementById('telefono')?.value || '';
+        var note = document.getElementById('note')?.value || '';
+
+        var lines = [];
+        lines.push('Richiesta fattura CTM WebBrowser');
+        lines.push('');
+        lines.push('Nome: ' + nome);
+        lines.push('Cognome: ' + cognome);
+        lines.push('Ragione sociale: ' + ragione);
+        lines.push('Indirizzo: ' + indirizzo);
+        lines.push('Partita IVA: ' + piva);
+        lines.push('Codice fiscale: ' + cfisc);
+        lines.push('Email per invio fattura: ' + email);
+        lines.push('Telefono: ' + telefono);
+        lines.push('');
+        lines.push('Note aggiuntive:');
+        lines.push(note || '-');
+        lines.push('');
+        lines.push('---');
+        lines.push('Pagamento già eseguito. Allego alla presente la ricevuta di bonifico/PayPal.');
+
+        var textToCopy = lines.join('\n');
+
+        function fallbackCopy(text) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          try {
+            document.execCommand('copy');
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          } catch (e) {
+            alert('Impossibile copiare automaticamente. Seleziona e copia manualmente il testo.');
+          }
+          document.body.removeChild(ta);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(function () {
+            alert('Dati di fatturazione copiati negli appunti.\nOra puoi incollarli nel corpo della mail (Ctrl+V).');
+          }).catch(function () {
+            fallbackCopy(textToCopy);
+          });
+        } else {
+          fallbackCopy(textToCopy);
+        }
+      });
+    }
+  });
+</script>
+
+<script src="analytics.js" defer></script>
+</body>
+</html>
